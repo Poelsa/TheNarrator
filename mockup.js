@@ -4,6 +4,14 @@ var Macros = [["Macro"], ["Another macro"]];
 var Templates = [["Template"], ["Another template"]];
 
 $(function() {
+	var i = 0;
+	$("#Workspace>div").each(function(){
+		this.renderer = Raphael(this,$(this).width(),$(this).height());
+		var rect = this.renderer.rect(290, 80+i*20, 60, 40, 10);
+		rect.attr({fill: "rgb(255,127,0)", stroke: "rgb(255,127,0)", "fill-opacity": 0, "stroke-width": 2, cursor: "move"});
+		i++;
+	});
+
 	$("#Elements").tabs();
 	$("#SideBar").droppable({
 		drop: function(event, ui) {
@@ -79,4 +87,9 @@ $(function() {
 			var info = this.info;
 			alert(info);
 		}).get(0).info = Templates[v];
+	
+	$(".portIn, .portOut").bind('mousedown', false);
+	$(".portOut").mousedown(function(e){
+		
+	});
 });
