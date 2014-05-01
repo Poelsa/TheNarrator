@@ -104,4 +104,12 @@ BODY
 .block
 {
   display: inline-block;
+  z-index: 1;
+}
+.TabInput
+{
+  display: inline-block;
+  z-index: 2;
+  width: 100px;
+  height: 75px;
 }

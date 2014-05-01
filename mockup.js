@@ -3,6 +3,19 @@ var Functions = [["Function"], ["Another function"]];
 var Macros = [["Macro"], ["Another macro"]];
 var Templates = [["Template"], ["Another template"]];
 
+var TabInput = new Object();
+
+TabInput["Input-OnCreate"] = new Array();
+TabInput["Input-OnCollide"] = new Array();
+TabInput["Input-OnDestroy"] = new Array();
+TabInput["Input-OnUpdate"] = new Array();
+
+//Test variables, remove once done
+TabInput["Input-OnCreate"][0] = "Create";
+TabInput["Input-OnCollide"][0] = "Collide";
+TabInput["Input-OnDestroy"][0] = "Destroy";
+TabInput["Input-OnUpdate"][0] = "Update";
+
 $(function() {
 	$("#Elements").tabs();
 	$("#SideBar").droppable({
@@ -46,6 +59,12 @@ $(function() {
 		}
 	});
 	
+	//Click function for TabInput boxes
+	$(".TabInput").click(function() {
+		alert(TabInput[$(this).attr('id')][0]); //Test, remove once done
+		//TODO: få fram pop-up av input property sheet där man kan definiera input
+	});
+	
 	// Zoom functionality
 	/*$("#Workspace").get(0).scale = 1;
 	$("#Workspace>div").bind("mousewheel", function(event){
@@ -80,3 +99,14 @@ $(function() {
 			alert(info);
 		}).get(0).info = Templates[v];
 });
+
+//Changes all the input values of a Tab
+function SetTabInput(TabID, InputArray)
+{
+	TabInput[TabID] = InputArray;
+}
+//Function that adds a new Tab and pushes a new array of Inputs to the TabInput array
+function AddTab(TabID, InputArray)
+{
+	TabInput[TabID] = InputArray;
+}
