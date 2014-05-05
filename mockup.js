@@ -11,12 +11,7 @@ $(function() {
 				ui.draggable.remove();
 		}
 	});
-
-	$(".Functions").draggable({
-		stack: 'div',
-		start: function(e){$(this).get(0).originalParent = $("#Workspace-OnCreate"); $(this).parent().children().appendTo("#TempArea");alert("ALERT");},
-		stop: function(e){$(this).parent().children().appendTo($(this).get(0).originalParent);}
-	});	
+	
 	$(".block").draggable({
 		stack: 'div',
 		start: function(e){$(this).get(0).originalParent = $(this).parent(); $(this).parent().children().appendTo("#TempArea");},
@@ -55,28 +50,7 @@ $(function() {
 			event.preventDefault();
 		}
 	});
-	$("#SideBar").mousedown(function(event){
-		$("#SideBar").get(0).drag = true;
-		$("#SideBar").get(0).positionX = event.pageX;
-		$("#SideBar").get(0).positionY = event.pageY;
-		event.preventDefault();
-	});
-	$("#SideBar").mouseup(function(event){
-		$("#SideBar").get(0).drag = false;
-		event.preventDefault();
-	});
-	$("#SideBar").mousemove(function(event){
-		if($("#SideBar").get(0).drag == true)
-		{
-			$("#SideBar").children().each(function(index,element){
-				$(this).css('top', parseInt($(this).css('top'))+event.pageY-$("#SideBar").get(0).positionY);
-				$(this).css('left', parseInt($(this).css('left'))+event.pageX-$("#SideBar").get(0).positionX);
-			});
-			$("#SideBar").get(0).positionX = event.pageX;
-			$("#SideBar").get(0).positionY = event.pageY;
-			event.preventDefault();
-		}
-	});
+	
 	// Zoom functionality
 	/*$("#Workspace").get(0).scale = 1;
 	$("#Workspace>div").bind("mousewheel", function(event){
@@ -94,13 +68,7 @@ $(function() {
 		$("<div>").html(Variables[v][0]).appendTo("#Elements-Variables").click(function(event){
 			var info = this.info;
 			alert(info);
-		}).get(0).info = Variables[v];
-	/*for(var v in Functions)
-		$("<div>").html(Functions[v][0]).appendTo("#Elements-Functions").click(function(event){
-			var info = this.info;
-			alert(info);
-		}).get(0).info = Functions[v];*/
-	
+		}).get(0).info = Variables[v];	
 	for(var v in Macros)
 		$("<div>").html(Macros[v][0]).appendTo("#Elements-Macros").click(function(event){
 			var info = this.info;

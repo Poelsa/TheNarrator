@@ -104,11 +104,7 @@ BODY
 .block
 {
   display: inline-block;
-}
-
-.Functions
-{
-	width: 290px;
-	height: 22px;
-	display: inline-block;
+  width: 200px;
+  height: 200px;
+  position: relative;
 }
