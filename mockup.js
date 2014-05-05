@@ -11,7 +11,7 @@ TabInput["Input-OnDestroy"] = new Array();
 TabInput["Input-OnUpdate"] = new Array();
 
 //Test variables, remove once done
-TabInput["Input-OnCreate"][0] = "Create";
+TabInput["Input-OnCreate"][0] = "Entity";
 TabInput["Input-OnCollide"][0] = "Collide";
 TabInput["Input-OnDestroy"][0] = "Destroy";
 TabInput["Input-OnUpdate"][0] = "Update";
