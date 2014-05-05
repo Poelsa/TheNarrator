@@ -6,9 +6,9 @@ var Templates = [["Template"], ["Another template"]];
 $(function() {
 	var i = 0;
 	$("#Workspace>div").each(function(){
-		this.renderer = Raphael(this,$(this).width(),$(this).height());
-		var rect = this.renderer.rect(290, 80+i*20, 60, 40, 10);
-		rect.attr({fill: "rgb(255,127,0)", stroke: "rgb(255,127,0)", "fill-opacity": 0, "stroke-width": 2, cursor: "move"});
+		this.renderer = Raphael(this,"100%","100%");
+		var line = new Line(this.renderer, "#999999");
+		line.Update({x: 0, y: 0}, {x: 290, y: 500});
 		i++;
 	});
 
