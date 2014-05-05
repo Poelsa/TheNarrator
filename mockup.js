@@ -16,6 +16,19 @@ TabInput["Input-OnCollide"][0] = "Collide";
 TabInput["Input-OnDestroy"][0] = "Destroy";
 TabInput["Input-OnUpdate"][0] = "Update";
 
+//Component test:
+//var trans = new Transform(1, 1, 1);
+//alert(trans.pos);
+//Trying to load components.js file if html load doesn't work
+
+$.getScript("components.js", function(){
+
+   alert("Script loaded and executed.");
+   var trans = new Transform(1, 1, 1);
+alert(trans.pos);
+   // Here you can use anything you defined in the loaded script
+});
+
 $(function() {
 	$("#Elements").tabs();
 	$("#SideBar").droppable({
