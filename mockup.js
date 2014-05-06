@@ -10,11 +10,12 @@ TabInput["Input-OnCollide"] = new Array();
 TabInput["Input-OnDestroy"] = new Array();
 TabInput["Input-OnUpdate"] = new Array();
 
-//Test variables, remove once done
-TabInput["Input-OnCreate"][0] = "Entity";
-TabInput["Input-OnCollide"][0] = "Collide";
-TabInput["Input-OnDestroy"][0] = "Destroy";
-TabInput["Input-OnUpdate"][0] = "Update";
+//Static input values predefined from the engine
+TabInput["Input-OnCreate"][0] = "Self";
+TabInput["Input-OnCollide"][0] = "Self";
+TabInput["Input-OnDestroy"][0] = "Self";
+TabInput["Input-OnUpdate"][0] = "Self";
+TabInput["Input-OnCollide"][1] = "Entity";
 
 
 $(function() {
