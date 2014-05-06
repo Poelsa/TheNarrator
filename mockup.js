@@ -4,6 +4,12 @@ var Macros = [["Macro"], ["Another macro"]];
 var Templates = [["Template"], ["Another template"]];
 
 $(function() {
+	$(document)[0].mousePosition = {};
+	$(document).mousemove(function(event) {
+        $(document)[0].mousePosition.x = event.pageX;
+        $(document)[0].mousePosition.y = event.pageY;
+    });
+	
 	$("#Elements").tabs();
 	$("#SideBar").droppable({
 		drop: function(event, ui) {
@@ -22,6 +28,7 @@ $(function() {
 		}
 	});
 	
+	// Move the whole workspace
 	$("#Workspace").mousedown(function(event){
 		$("#Workspace").get(0).drag = true;
 		$("#Workspace").get(0).positionX = event.pageX;
@@ -46,6 +53,7 @@ $(function() {
 			event.preventDefault();
 		}
 	});
+	////
 	
 	FunctionsInit();
 	
