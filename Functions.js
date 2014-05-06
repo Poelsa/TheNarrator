@@ -5,13 +5,52 @@ var FunctionsInit = function() {
 	returnvalue : "Entity"
 	};
 
-	functions.NewTransform = {
-	id : "NewTransform",
+	functions.NewTransformComponent = {
+	id : "NewTransformComponent",
 	invalue1 : "Entity",
-	returnvalue : "TransformComp"
+	returnvalue : "TransformComponent"
 
 	};
-
+	
+	functions.NewCollisionComponent = {
+	id: "NewCollisionComponent",
+	invalue1 : "Entity",
+	returnvalue : "CollisionComponent"
+	};
+	
+	functions.NewPhysicsComponent = {
+	id : "NewPhysicsComponent",
+	invalue1 : "Entity",
+	returnvalue : "PhysicsComponent"
+	};
+	
+	functions.NewScriptComponent = {
+	id : "NewScriptComponent",
+	invalue1: "Entity",
+	invalue2: "String",
+	returnvalue : "ScriptComponent"
+	};
+	
+	functions.CreatePhysicsHandle = {
+	id: "CreatePhysicsHandle",
+	accessor: "CollisionComponent",
+	invalue1: "Entity",
+	invalue2: "int",  //Type
+	invalue3: "bool", //Externally controlled
+	returnvalue: "int-pointer"
+	};
+	
+	functions.BindSphereShape = {
+	id: "BindSphereShape",
+	accessor: "PhysicsComponent",
+	invalue1: "CollisionComponent",
+	invalue2: "vector3", //Position
+	invalue3: "quarternion", //Rotation
+	invalue4: "float", //radius
+	invalue5: "float", //mass
+	invalue6: "bool", //no spelare eller no world, kolla i fysiken i no remember
+	invalue7: "bool" //Den som inte den ovan är.
+	};
 	
 	for(var prop in functions)
 		$("<div class='functions'>").html(functions[prop].id).appendTo("#Elements-Functions").mousedown(function(){
