@@ -53,10 +53,8 @@ BODY
   padding: 0;
   -webkit-box-sizing: border-box;
 }
-#Elements>div>div
+.functions
 {
-  margin: 2px;
-  padding: 2px;
   border: 1px solid #404040;
   background: #121212 url(css/vader/images/ui-bg_gloss-wave_16_121212_500x100.png) 50% top repeat-x;
   background-size: 100% 100%;
@@ -96,6 +94,7 @@ BODY
   position: absolute;
   top: 54px;
   left: 301px;
+  margin: 1px;
 }
 .ui-tabs-panel
 {
@@ -104,6 +103,9 @@ BODY
 .block
 {
   display: inline-block;
+  width: 200px;
+  height: 200px;
+  position: absolute;
   z-index: 1;
 }
 .TabInput
@@ -113,3 +115,5 @@ BODY
   width: 100px;
   height: 75px;
 }
+
+
