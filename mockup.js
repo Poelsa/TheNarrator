@@ -1,4 +1,4 @@
-var Variables = [["Variable", "info1", "info2"], ["Another variable", "info1", "info2"], ["A third variable", "info1", "info2"]];
+var Variables = ["Transform"];
 var Functions = [["Function"], ["Another function"]];
 var Macros = [["Macro"], ["Another macro"]];
 var Templates = [["Template"], ["Another template"]];
@@ -16,18 +16,6 @@ TabInput["Input-OnCollide"][0] = "Collide";
 TabInput["Input-OnDestroy"][0] = "Destroy";
 TabInput["Input-OnUpdate"][0] = "Update";
 
-//Component test:
-//var trans = new Transform(1, 1, 1);
-//alert(trans.pos);
-//Trying to load components.js file if html load doesn't work
-
-$.getScript("components.js", function(){
-
-   alert("Script loaded and executed.");
-   var trans = new Transform(1, 1, 1);
-alert(trans.pos);
-   // Here you can use anything you defined in the loaded script
-});
 
 $(function() {
 	$("#Elements").tabs();
@@ -92,7 +80,7 @@ $(function() {
 	
 	// Populate the sidebar with elements
 	for(var v in Variables)
-		$("<div>").html(Variables[v][0]).appendTo("#Elements-Variables").click(function(event){
+		$("<div>").html(Variables[v]).appendTo("#Elements-Variables").click(function(event){
 			var info = this.info;
 			alert(info);
 		}).get(0).info = Variables[v];
