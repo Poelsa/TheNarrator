@@ -7,11 +7,14 @@
 */
 
 // This function is loaned and highly modified from http://raphaeljs.com/graffle.html
-var Line = function(renderer, styling)
+var Line = function(styling, renderer)
 {
 	// New-constructor
 	{
-		this.renderer = renderer;
+		if(renderer)
+			this.renderer = renderer;
+		else
+			this.renderer = $("#Workspace>div")[$("#Workspace").tabs("option", "active")].renderer;
 		this.line = this.renderer.path().attr({stroke: styling.split("|")[0], fill: "none", "stroke-width": styling.split("|")[1] || 3});
 	}
 	

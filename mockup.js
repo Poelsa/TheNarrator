@@ -6,9 +6,9 @@ var Templates = [["Template"], ["Another template"]];
 $(function() {
 	var i = 0;
 	$("#Workspace>div").each(function(){
-		this.renderer = Raphael(this,"100%","100%");
-		var line = new Line(this.renderer, "#999999");
-		line.Update({x: 0, y: 0}, {x: 290, y: 500});
+		this.renderer = Raphael(this,$(this).width(),$(this).height());
+		var line = new Line("#999999", this.renderer);
+		line.Update({x: 50, y: 100}, {x: 290, y: 500});
 		i++;
 	});
 
@@ -23,7 +23,7 @@ $(function() {
 		stack: 'div',
 		start: function(e){$(this).get(0).originalParent = $(this).parent(); $(this).parent().children().appendTo("#TempArea");},
 		stop: function(e){$(this).parent().children().appendTo($(this).get(0).originalParent);}
-	}).tooltip({ hide: { effect: "explode", duration: 1000 } });
+	});
 	var tabs = $("#Workspace").tabs();
 	tabs.find(".ui-tabs-nav").sortable({
 		axis: "x",
@@ -90,6 +90,23 @@ $(function() {
 	
 	$(".portIn, .portOut").bind('mousedown', false);
 	$(".portOut").mousedown(function(e){
-		
+		//alert("mousedown");
+	});
+	$(".portOut").draggable({
+		start: function(e, ui){
+			$(this)[0].line = new Line("red");
+			ui.helper.html("").removeClass("portOut");
+		},
+		drag: function(e, ui){
+			var workspace = $($("#Workspace>div")[$("#Workspace").tabs("option", "active")]);
+			$(this)[0].line.Update({x: $(this).offset().left + $(this).width() + 6 - workspace.offset().left, y: $(this).offset().top + $(this).height()/2 - workspace.offset().top}, {x: ui.helper.offset().left - workspace.offset().left, y: ui.helper.offset().top - workspace.offset().top});
+		},
+		stop: function(e, ui){
+			$(this)[0].line.Remove();
+		},
+		helper: "clone",
+		revert: true,
+		revertDuration: 0,
+		cursorAt: {left:0, top:0}
 	});
 });
