@@ -72,9 +72,7 @@ $(function() {
 	
 	FunctionsInit();
 	ComponentsInit();
-	.block:hover(function() {
-		alert("HEJHEJ");
-	});
+	
 	$(".ui-widget-content").select(function() {
 		alert("HEJHEJ");
 	});
