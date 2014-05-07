@@ -71,7 +71,13 @@ $(function() {
 	////
 	
 	FunctionsInit();
-	
+	ComponentsInit();
+	.block:hover(function() {
+		alert("HEJHEJ");
+	});
+	$(".ui-widget-content").select(function() {
+		alert("HEJHEJ");
+	});
 	//Click function for TabInput boxes
 	$(".TabInput").click(function() {
 		alert(TabInput[$(this).attr('id')][0]); //Test, remove once done
