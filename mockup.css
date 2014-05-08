@@ -47,9 +47,15 @@ BODY
   float: left;
   z-index: -1;
 }
+#Overview
+{
+  height: 50%;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+}
 #Elements
 {
-  height: 100%;
+  height: 50%;
   padding: 0;
   -webkit-box-sizing: border-box;
 }
@@ -115,6 +121,14 @@ BODY
   position: absolute;
   z-index: 1;
 }
+.variable
+{
+  display: inline-block;
+  width: 125px;
+  height: 100px;
+  position: absolute;
+  z-index: 1;
+}
 .TabInput
 {
   position: absolute;
@@ -123,5 +137,28 @@ BODY
   width: 100px;
   height: 75px;
 }
+.block .ui-selecting
+{
+  display: inline-block;
+  width: 200px;
+  height: 50px;
+  position: absolute;
+  z-index: 1;
+}
+.block .ui-selected
+{
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  z-index: 1;
+}
 
-
+.highlight
+{
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  z-index: 1;
+}

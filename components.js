@@ -1,5 +1,11 @@
 var ComponentsInit = function() {
 	var components = {};
+
+	components.Entity = {
+	id : "Entity",
+	entity : ["Entity", "Entity"]
+	};
+
 	components.Transform = {
 	id : "Tranform",
 	pos : ["Position", "vector3"],
@@ -41,7 +47,7 @@ for(var prop in components)
 		.draggable({
 			start: function(e, ui){
 				$(this)[0].ui = ui;
-				ui.helper.addClass("block");
+				ui.helper.addClass("variable");
 				$(this).get(0).originalParent = $(this).parent();
 				$(this).parent().children().appendTo("#TempArea");
 			},
@@ -50,7 +56,7 @@ for(var prop in components)
 			revert: function(){
 				var currentTab = $("#Workspace>div")[$("#Workspace").tabs("option", "active")];
 				if($(this)[0].ui.helper.offset().left - $(currentTab).offset().left > -100)
-					$("<div class='block ui-widget-content ui-draggable'>").html($(this).html()).appendTo(currentTab).draggable({
+					$("<div class='variable ui-widget-content ui-draggable'>").html($(this).html()).appendTo(currentTab).draggable({
 						stack: 'div',
 						start: function(e){
 							$("#TempArea").css("left", $(this).parent().parent().offset().left);
@@ -65,7 +71,8 @@ for(var prop in components)
 							}
 					}).tooltip({ hide: { effect: "explode", duration: 1000 } })
 					.css("top", $(this)[0].ui.helper.offset().top - $(currentTab).offset().top)
-					.css("left", $(this)[0].ui.helper.offset().left - $(currentTab).offset().left);
+					.css("left", $(this)[0].ui.helper.offset().left - $(currentTab).offset().left)
+					.hover().css("cursor","pointer");
 				
 				$(this).parent().children().appendTo($(this).get(0).originalParent);
 				
@@ -73,5 +80,5 @@ for(var prop in components)
 			},
 			helper: "clone",
 			revertDuration: 0
-		});
+		}).hover().css("cursor", "pointer");
 };

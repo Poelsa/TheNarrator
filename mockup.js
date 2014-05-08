@@ -5,6 +5,8 @@ var Templates = [["Template"], ["Another template"]];
 
 var TabInput = new Object();
 
+var SelectedItems = [];
+
 TabInput["Input-OnCreate"] = new Array();
 TabInput["Input-OnCollide"] = new Array();
 TabInput["Input-OnDestroy"] = new Array();
@@ -26,10 +28,11 @@ $(function() {
     });
 	
 	$("#Elements").tabs();
+	$("#Overview").tabs();
 	$("#SideBar").droppable({
 		drop: function(event, ui) {
 			ui.draggable.parent().children().appendTo(ui.draggable.get(0).originalParent);
-			if(ui.draggable.hasClass("block"))
+			if(ui.draggable.hasClass("block") || ui.draggable.hasClass("variable"))
 				ui.draggable.remove();
 			
 		}
@@ -42,6 +45,8 @@ $(function() {
 			tabs.tabs("refresh");
 		}
 	});
+
+	//$("#Workspace").selectable();
 	
 	// Move the whole workspace
 	$("#Workspace").mousedown(function(event){
@@ -73,9 +78,7 @@ $(function() {
 	FunctionsInit();
 	ComponentsInit();
 	
-	$(".ui-widget-content").select(function() {
-		alert("HEJHEJ");
-	});
+
 	//Click function for TabInput boxes
 	$(".TabInput").click(function() {
 		alert(TabInput[$(this).attr('id')][0]); //Test, remove once done
@@ -108,3 +111,13 @@ function AddTab(TabID, InputArray)
 
 });
 
+//Trying to get selection to work
+var classHighlight = "highlight";
+var $somuchtest;
+var selectFunc = function(event) {
+	event.preventDefault();
+	if($somuchtest)
+		$somuchtest.removeClass(classHighlight);
+	$(event.target).addClass(classHighlight);
+	$somuchtest = $(event.target);
+};
