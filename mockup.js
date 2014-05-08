@@ -84,9 +84,9 @@ $(function() {
 		alert(TabInput[$(this).attr('id')][0]); //Test, remove once done
 		//TODO: få fram pop-up av input property sheet där man kan definiera input
 	});
-	
+	/*
 	// Zoom functionality
-	/*$("#Workspace").get(0).scale = 1;
+	$("#Workspace").get(0).scale = 1;
 	$("#Workspace>div").bind("mousewheel", function(event){
 		var delta = event.originalEvent.wheelDelta;
 		if(delta > 0)
@@ -112,12 +112,12 @@ function AddTab(TabID, InputArray)
 });
 
 //Trying to get selection to work
-var classHighlight = "highlight";
-var $somuchtest;
+var classHighlight = "selected";
+var $currentSelected;
 var selectFunc = function(event) {
 	event.preventDefault();
-	if($somuchtest)
-		$somuchtest.removeClass(classHighlight);
+	if($currentSelected)
+		$currentSelected.removeClass(classHighlight);
 	$(event.target).addClass(classHighlight);
-	$somuchtest = $(event.target);
+	$currentSelected = $(event.target);
 };

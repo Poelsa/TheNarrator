@@ -105,7 +105,7 @@ BODY
 #TempArea
 {
   position: absolute;
-  top: 54px;
+  top: 84px;
   left: 301px;
   margin: 1px;
 }
@@ -137,28 +137,7 @@ BODY
   width: 100px;
   height: 75px;
 }
-.block .ui-selecting
+.selected
 {
-  display: inline-block;
-  width: 200px;
-  height: 50px;
-  position: absolute;
-  z-index: 1;
-}
-.block .ui-selected
-{
-  display: inline-block;
-  width: 50px;
-  height: 50px;
-  position: absolute;
-  z-index: 1;
-}
-
-.highlight
-{
-  display: inline-block;
-  width: 50px;
-  height: 50px;
-  position: absolute;
-  z-index: 1;
+  border-color: cyan;
 }
