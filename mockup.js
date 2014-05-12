@@ -50,23 +50,31 @@ $(function() {
 	
 	// Move the whole workspace
 	$("#Workspace").mousedown(function(event){
-		$("#Workspace").get(0).drag = true;
-		$("#Workspace").get(0).positionX = event.pageX;
-		$("#Workspace").get(0).positionY = event.pageY;
-		event.preventDefault();
+		var currentTab = $("#Workspace>div")[$("#Workspace").tabs("option", "active")];
+		if(event.target == currentTab) {
+			$("#Workspace").get(0).drag = true;
+			$("#Workspace").css("cursor","move")
+			$("#Workspace").get(0).positionX = event.pageX;
+			$("#Workspace").get(0).positionY = event.pageY;
+			event.preventDefault();
+		}
 	});
 	
 	$("#Workspace").mouseup(function(event){
 		$("#Workspace").get(0).drag = false;
+		$("#Workspace").css("cursor","default")
 		event.preventDefault();
 	});
 	
 	$("#Workspace").mousemove(function(event){
 		if($("#Workspace").get(0).drag == true)
 		{
-			$("#Workspace").children().each(function(index,element){
-				$(this).css('top', parseInt($(this).css('top'))+event.pageY-$("#Workspace").get(0).positionY);
-				$(this).css('left', parseInt($(this).css('left'))+event.pageX-$("#Workspace").get(0).positionX);
+			var currentTab = $("#Workspace>div")[$("#Workspace").tabs("option", "active")];
+			$(currentTab).children().each(function(index,element){
+				if($(this).attr("role") != "tab") {
+					$(this).css('top', parseInt($(this).css('top'))+event.pageY-$("#Workspace").get(0).positionY);
+					$(this).css('left', parseInt($(this).css('left'))+event.pageX-$("#Workspace").get(0).positionX);
+				}
 			});
 			$("#Workspace").get(0).positionX = event.pageX;
 			$("#Workspace").get(0).positionY = event.pageY;
@@ -84,18 +92,23 @@ $(function() {
 		alert(TabInput[$(this).attr('id')][0]); //Test, remove once done
 		//TODO: få fram pop-up av input property sheet där man kan definiera input
 	});
-	/*
+	
 	// Zoom functionality
 	$("#Workspace").get(0).scale = 1;
 	$("#Workspace>div").bind("mousewheel", function(event){
 		var delta = event.originalEvent.wheelDelta;
-		if(delta > 0)
-			$("#Workspace").get(0).scale *= 1.1;
-		else if(delta < 0)
-			$("#Workspace").get(0).scale /= 1.1;
+		if(delta > 0) {
+			$("#Workspace").get(0).scale += 0.1;
+			$("#TempArea").get(0).scale += 0.1;
+		}
+		else if(delta < 0) {
+			$("#Workspace").get(0).scale -= 0.1;
+			$("#TempArea").get(0).scale -= 0.1;
+		}
 		$(this).css('transform', 'scale('+$("#Workspace").get(0).scale+')');
+		$(this).css('transform', 'scale('+$("#TempArea").get(0).scale+')');
 		event.preventDefault();
-	});*/
+	});
 
 
 //Changes all the input values of a Tab

@@ -59,6 +59,9 @@ for(var prop in components)
 					$("<div class='variable ui-widget-content ui-draggable'>").html($(this).html()).appendTo(currentTab).draggable({
 						stack: 'div',
 						start: function(e){
+							//$(".TabInput").css("top", $(this).parent().parent().offset().top);
+							//$(".TabInput").css("left", $(this).parent().parent().offset().left);
+							$(".TabInput").css("margin", "1px");
 							$("#TempArea").css("left", $(this).parent().parent().offset().left);
 							$("#TempArea").css("top", $(this).parent().parent().offset().top);
 							$("#TempArea").css("width", $(this).parent().parent().width());

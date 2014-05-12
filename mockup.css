@@ -132,10 +132,13 @@ BODY
 .TabInput
 {
   position: absolute;
+  top: 26px;
+  left: 0px;
   display: inline-block;
   z-index: 2;
   width: 100px;
   height: 75px;
+  margin: 1px;
 }
 .selected
 {
