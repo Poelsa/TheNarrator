@@ -4,12 +4,15 @@ var Macros = [["Macro"], ["Another macro"]];
 var Templates = [["Template"], ["Another template"]];
 
 $(function() {
-	var i = 0;
 	$("#Workspace>div").each(function(){
 		this.renderer = Raphael(this,$(this).width(),$(this).height());
-		var line = new Line("#999999", this.renderer);
-		line.Update({x: 50, y: 100}, {x: 290, y: 500});
-		i++;
+	});
+	
+	// Keep current mouse position accessible from everywhere
+	$(document)[0].mousePosition = {};
+	$(document).mousemove(function(event) {
+		$(document)[0].mousePosition.x = event.pageX;
+		$(document)[0].mousePosition.y = event.pageY;
 	});
 
 	$("#Elements").tabs();
@@ -27,17 +30,17 @@ $(function() {
 			// Keep the line start and end updated while dragging
 			var workspace = $($("#Workspace>div")[$("#Workspace").tabs("option", "active")]);
 			$(this).children().filter(".portIn").each(function(){
-				if($(this)[0].line)
-					$(this)[0].line.Update($(this)[0].line.from,
+				if(this.line)
+					this.line.Update(this.line.from,
 						{x: $(this).offset().left + 6 - workspace.offset().left,
 						y: $(this).offset().top + $(this).height()/2 - workspace.offset().top});
 			});
 			$(this).children().filter(".portOut").each(function(){
-				if($(this)[0].line)
-					$(this)[0].line.Update(
+				for(var index in this.line)
+					this.line[index].Update(
 						{x: $(this).offset().left + $(this).width() + 6 - workspace.offset().left,
 						y: $(this).offset().top + $(this).height()/2 - workspace.offset().top},
-						$(this)[0].line.to);
+						$(this)[0].line[index].to);
 			});
 		}
 	});
@@ -104,51 +107,6 @@ $(function() {
 			var info = this.info;
 			alert(info);
 		}).get(0).info = Templates[v];
-	
-	$(".portIn, .portOut").bind('mousedown', false);
-	$(".portOut").mousedown(function(e){
-		//alert("mousedown");
-	});
-	$(".portOut").draggable({
-		start: function(e, ui){
-			$(this)[0].line = new Line("red");
-			ui.helper.html("");
-			ui.helper.css("margin", "0");
-			ui.helper.css("padding", "0");
-			ui.helper.css("visibility", "hidden");
-		},
-		drag: function(e, ui){
-			var workspace = $($("#Workspace>div")[$("#Workspace").tabs("option", "active")]);
-			$(this)[0].line.Update(
-				{x: $(this).offset().left + $(this).width() + 6 - workspace.offset().left,
-				y: $(this).offset().top + $(this).height()/2 - workspace.offset().top},
-				{x: ui.helper.offset().left + 6 - workspace.offset().left,
-				y: ui.helper.offset().top + 6 - workspace.offset().top});
-		},
-		stop: function(e, ui){
-			var isAttached = false;
-			
-			// Snap event processing:
-			var draggable = $(this);
-			$.each(draggable.data("ui-draggable").snapElements, function(index, element) {
-				if(!isAttached && element.snapping)
-				{
-					$(element.item)[0].line = draggable[0].line;
-					isAttached = true;
-				}
-				else if(!element.snapping && $(element.item)[0].line == draggable[0].line)
-					$(element.item)[0].line = null;
-			});
-			
-			if(!isAttached)
-				$(this)[0].line.Remove();
-		},
-		helper: "clone",
-		revert: true,
-		revertDuration: 0,
-		cursorAt: {left: 6, top: 6},
-		snap: ".portIn",
-		snapMode: "inner",
-		snapTolerance: 6
-	});
+		
+	PortProcessing();
 });
