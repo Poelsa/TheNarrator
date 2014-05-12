@@ -1,0 +1,143 @@
+BODY
+{
+  background-color: black;
+  color: white;
+  margin: 0;
+}
+
+#ToolBar
+{
+  background: url(css/vader/images/ui-bg_highlight-hard_15_888888_1x100.png);
+  background-size: 100% 100%;
+  margin: 0;
+  font-size: 12px;
+  position: relative;
+  z-index: 100;
+}
+#ToolBar li
+{
+  margin: 2px;
+  position: relative;
+  padding: 2px 4px 2px 2px;
+  cursor: pointer;
+  float: left;
+  list-style: none;
+}
+#ToolBar span.ui-icon
+{
+  float: left;
+  margin: 0 2px 0 0;
+}
+
+#Container
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding-top: 26px;
+  -webkit-box-sizing: border-box;
+}
+
+#SideBar
+{
+  width: 300px;
+  height: 100%;
+  float: left;
+  z-index: -1;
+}
+#Overview
+{
+  height: 50%;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+}
+#Elements
+{
+  height: 50%;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+}
+.functions
+{
+  border: 1px solid #404040;
+  background: #121212 url(css/vader/images/ui-bg_gloss-wave_16_121212_500x100.png) 50% top repeat-x;
+  background-size: 100% 100%;
+  color: #eeeeee;
+}
+.components
+{
+  border: 1px solid #404040;
+  background: #121212 url(css/vader/images/ui-bg_gloss-wave_16_121212_500x100.png) 50% top repeat-x;
+  background-size: 100% 100%;
+  color: #eeeeee;
+}
+.ui-tabs-anchor
+{
+  font-size: 12px;
+  padding: 2px;
+}
+#SearchBox
+{
+  font-size: 12px;
+  width: 270px;
+}
+.ui-icon
+{
+  display: inline-block;
+  vertical-align: middle;
+}
+#Workspace
+{
+  margin: 0 0 0 300px;
+  padding: 0;
+  height: 100%;
+  -webkit-box-sizing: border-box;
+  overflow: hidden;
+}
+#Workspace>div
+{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+#TempArea
+{
+  position: absolute;
+  top: 84px;
+  left: 301px;
+  margin: 1px;
+}
+.ui-tabs-panel
+{
+  padding: 0;
+}
+.block
+{
+  display: inline-block;
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  z-index: 1;
+}
+.variable
+{
+  display: inline-block;
+  width: 125px;
+  height: 100px;
+  position: absolute;
+  z-index: 1;
+}
+.TabInput
+{
+  position: absolute;
+  display: inline-block;
+  z-index: 2;
+  width: 100px;
+  height: 75px;
+}
+.selected
+{
+  border-color: cyan;
+}
