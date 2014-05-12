@@ -5,6 +5,8 @@ var Templates = [["Template"], ["Another template"]];
 
 var TabInput = new Object();
 
+var SelectedItems = [];
+
 TabInput["Input-OnCreate"] = new Array();
 TabInput["Input-OnCollide"] = new Array();
 TabInput["Input-OnDestroy"] = new Array();
@@ -35,10 +37,11 @@ $(function() {
 	
 	// Initialize jQuery UI elements
 	$("#Elements").tabs();
+	$("#Overview").tabs();
 	$("#SideBar").droppable({
 		drop: function(event, ui) {
 			ui.draggable.parent().children().appendTo(ui.draggable.get(0).originalParent);
-			if(ui.draggable.hasClass("block"))
+			if(ui.draggable.hasClass("block") || ui.draggable.hasClass("variable"))
 				ui.draggable.remove();
 			
 		}
@@ -51,6 +54,8 @@ $(function() {
 			tabs.tabs("refresh");
 		}
 	});
+
+	//$("#Workspace").selectable();
 	
 	// Move the whole workspace
 	$("#Workspace").mousedown(function(event){
@@ -82,17 +87,16 @@ $(function() {
 	FunctionsInit();
 	ComponentsInit();
 	
-	$(".ui-widget-content").select(function() {
-		alert("HEJHEJ");
-	});
+
 	//Click function for TabInput boxes
 	$(".TabInput").click(function() {
 		alert(TabInput[$(this).attr('id')][0]); //Test, remove once done
 		//TODO: få fram pop-up av input property sheet där man kan definiera input
 	});
-	
-	// Zoom functionality, not working as it should
-	/*$("#Workspace").get(0).scale = 1;
+
+	/*
+	// Zoom functionality
+	$("#Workspace").get(0).scale = 1;
 	$("#Workspace>div").bind("mousewheel", function(event){
 		var delta = event.originalEvent.wheelDelta;
 		if(delta > 0)
@@ -114,3 +118,14 @@ $(function() {
 		TabInput[TabID] = InputArray;
 	}
 });
+
+//Trying to get selection to work
+var classHighlight = "selected";
+var $currentSelected;
+var selectFunc = function(event) {
+	event.preventDefault();
+	if($currentSelected)
+		$currentSelected.removeClass(classHighlight);
+	$(event.target).addClass(classHighlight);
+	$currentSelected = $(event.target);
+};
