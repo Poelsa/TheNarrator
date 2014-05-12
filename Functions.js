@@ -2,54 +2,45 @@ var FunctionsInit = function() {
 	var functions = {};
 	functions.NewEntity = {
 	id : "NewEntity",
-	returnvalue : "Entity"
+	outVar : [ "Entity" ]
 	};
 
 	functions.NewTransformComponent = {
 	id : "NewTransformComponent",
-	invalue1 : "Entity",
-	returnvalue : "TransformComponent"
-
+	inVar : [ "Entity" ],
+	OutVar : [ "TransformComponent" ]
 	};
 	
 	functions.NewCollisionComponent = {
 	id: "NewCollisionComponent",
-	invalue1 : "Entity",
-	returnvalue : "CollisionComponent"
+	inVar : [ "Entity" ],
+	outVar : [ "CollisionComponent" ]
 	};
 	
 	functions.NewPhysicsComponent = {
 	id : "NewPhysicsComponent",
-	invalue1 : "Entity",
-	returnvalue : "PhysicsComponent"
+	inVar : [ "Entity" ],
+	outVar : ["PhysicsComponent" ]
 	};
 	
 	functions.NewScriptComponent = {
 	id : "NewScriptComponent",
-	invalue1: "Entity",
-	invalue2: "String",
-	returnvalue : "ScriptComponent"
+	inVar : [ "Entity", "String" ],
+	outVar : ["ScriptComponent" ]
 	};
 	
 	functions.CreatePhysicsHandle = {
 	id: "CreatePhysicsHandle",
 	accessor: "CollisionComponent",
-	invalue1: "Entity",
-	invalue2: "int",  //Type
-	invalue3: "bool", //Externally controlled
-	returnvalue: "int-pointer"
+	inVar : [ "Entity", "int", "bool" ],
+	outVar : [ "int-pointer" ]
 	};
 	
 	functions.BindSphereShape = {
 	id: "BindSphereShape",
 	accessor: "PhysicsComponent",
-	invalue1: "CollisionComponent",
-	invalue2: "vector3", //Position
-	invalue3: "quarternion", //Rotation
-	invalue4: "float", //radius
-	invalue5: "float", //mass
-	invalue6: "bool", //no spelare eller no world, kolla i fysiken i no remember
-	invalue7: "bool" //Den som inte den ovan är.
+	inVar : [ "CollisionComponent", "vector3",  "quarternion",
+				"float", "float", "bool", "bool"]
 	};
 	
 	for(var prop in functions)
@@ -62,9 +53,18 @@ var FunctionsInit = function() {
 		.draggable({
 			start: function(e, ui){
 				$(this)[0].ui = ui;
+				ui.helper.html(this.func.id);
 				ui.helper.addClass("block");
 				$(this).get(0).originalParent = $(this).parent();
 				$(this).parent().children().appendTo("#TempArea");
+				for (var index in this.func.inVar)
+				{
+					ui.helper.append("<div class=\"portIn\">" + this.func.inVar[index] + "</div>");
+				}
+				for (var index in this.func.outVar)
+				{
+					ui.helper.append("<div class=\"portOut\">" + this.func.outVar[index] + "</div>");
+				}
 			},
 			drag: function(e, ui){
 				// Keep the line start and end updated while dragging
@@ -86,7 +86,8 @@ var FunctionsInit = function() {
 			revert: function(){
 				var currentTab = $("#Workspace>div")[$("#Workspace").tabs("option", "active")];
 				if($(this)[0].ui.helper.offset().left - $(currentTab).offset().left > -100)
-					$("<div class='block ui-widget-content ui-draggable'>").html($(this).html()).appendTo(currentTab).draggable({
+				{
+					var newblock = $("<div class='block ui-widget-content ui-draggable'>").html($(this).html()).appendTo(currentTab).draggable({
 						stack: 'div',
 						start: function(e){
 							$("#TempArea").css("left", $(this).parent().parent().offset().left);
@@ -104,13 +105,23 @@ var FunctionsInit = function() {
 					.css("left", $(this)[0].ui.helper.offset().left - $(currentTab).offset().left)
 					.css("cursor","pointer")
 					.click(selectFunc);
+					
+					for (var index in this.func.inVar)
+					{
+						newblock.append("<div class=\"portIn\">" + this.func.inVar[index] + "</div>");
+					}
+					for (var index in this.func.outVar)
+					{
+						newblock.append("<div class=\"portOut\">" + this.func.outVar[index] + "</div>");
+					}
+				}
 				
 				$(this).parent().children().appendTo($(this).get(0).originalParent);
 				return true; // revert
 			},
 			helper: "clone",
 			revertDuration: 0
-		}).hover().css("cursor", "pointer");
+		}).hover().css("cursor", "pointer")[0].func = functions[prop];
 };
 
 /* This code should be called when creating a new block which has in and out ports
