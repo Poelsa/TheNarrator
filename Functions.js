@@ -109,22 +109,30 @@ var FunctionsInit = function() {
 					.css("cursor","pointer")
 					.click(selectFunc);
 					
-          newblock.append("<br class=\"clear\">");
+					newblock.append("<br class=\"clear\">");
 					for (var index in $(this)[0].func.inVar)
 					{
-						newblock.append("<div class=\"portIn\">" + $(this)[0].func.inVar[index] + "</div>");
+						$("<div class=\"portIn\">" + $(this)[0].func.inVar[index] + "</div>")
+						.appendTo(newblock)
+						.editable(function(value, settings){
+							return (value);
+						},
+						{
+							event: "dblclick",
+							style: "display: inline-block"
+						});
 					}
 					for (var index in $(this)[0].func.outVar)
 					{
 						$("<div class=\"portOut\">" + $(this)[0].func.outVar[index] + "</div>")
-            .appendTo(newblock)
-            .editable(function(value, settings){
-              return (value);
-            },
-            {
-              event: "dblclick",
-              style: "display: inline-block"
-            });
+						.appendTo(newblock)
+						.editable(function(value, settings){
+							return (value);
+						},
+						{
+							event: "dblclick",
+							style: "display: inline-block"
+						});
 					}
 				}
 				
