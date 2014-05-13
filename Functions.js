@@ -2,6 +2,7 @@ var FunctionsInit = function() {
 	var functions = {};
 	functions.NewEntity = {
 	id : "NewEntity",
+	inVar : [],
 	outVar : [ "Entity" ]
 	};
 
@@ -40,7 +41,8 @@ var FunctionsInit = function() {
 	id: "BindSphereShape",
 	accessor: "PhysicsComponent",
 	inVar : [ "CollisionComponent", "vector3",  "quarternion",
-				"float", "float", "bool", "bool" ]
+				"float", "float", "bool", "bool" ],
+	outVar : []
 	};
 	
 	for(var prop in functions)
@@ -57,13 +59,14 @@ var FunctionsInit = function() {
 				ui.helper.addClass("block");
 				$(this).get(0).originalParent = $(this).parent();
 				$(this).parent().children().appendTo("#TempArea");
-				for (var index in this.func.inVar)
+        ui.helper.append("<br class=\"clear\">");
+				for (var index in $(this)[0].func.inVar)
 				{
-					ui.helper.append("<div class=\"portIn\">" + this.func.inVar[index] + "</div>");
+					ui.helper.append("<div class=\"portIn\">" + $(this)[0].func.inVar[index] + "</div>");
 				}
-				for (var index in this.func.outVar)
+				for (var index in $(this)[0].func.outVar)
 				{
-					ui.helper.append("<div class=\"portOut\">" + this.func.outVar[index] + "</div>");
+					ui.helper.append("<div class=\"portOut\">" + $(this)[0].func.outVar[index] + "</div>");
 				}
 			},
 			drag: function(e, ui){
@@ -106,13 +109,18 @@ var FunctionsInit = function() {
 					.css("cursor","pointer")
 					.click(selectFunc);
 					
-					for (var index in this.func.inVar)
+          newblock.append("<br class=\"clear\">");
+					for (var index in $(this)[0].func.inVar)
 					{
-						newblock.append("<div class=\"portIn\">" + this.func.inVar[index] + "</div>");
+						newblock.append("<div class=\"portIn\">" + $(this)[0].func.inVar[index] + "</div>");
 					}
-					for (var index in this.func.outVar)
+					for (var index in $(this)[0].func.outVar)
 					{
-						newblock.append("<div class=\"portOut\">" + this.func.outVar[index] + "</div>");
+						newblock.append("<div class=\"portOut\">" + $(this)[0].func.outVar[index] + "</div>").editable(function(value, settings){
+              return (value);
+            },
+            {
+            });
 					}
 				}
 				
