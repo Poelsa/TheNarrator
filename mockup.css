@@ -73,6 +73,13 @@ BODY
   background-size: 100% 100%;
   color: #eeeeee;
 }
+.templates
+{
+  border: 1px solid #404040;
+  background: #121212 url(css/vader/images/ui-bg_gloss-wave_16_121212_500x100.png) 50% top repeat-x;
+  background-size: 100% 100%;
+  color: #eeeeee;
+}
 .ui-tabs-anchor
 {
   font-size: 12px;

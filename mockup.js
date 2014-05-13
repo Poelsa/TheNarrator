@@ -1,24 +1,7 @@
-var Variables = ["Transform"];
-var Functions = [["Function"], ["Another function"]];
-var Macros = [["Macro"], ["Another macro"]];
-var Templates = [["Template"], ["Another template"]];
 
-var TabInput = new Object();
+
 
 var SelectedItems = [];
-
-TabInput["Input-OnCreate"] = new Array();
-TabInput["Input-OnCollide"] = new Array();
-TabInput["Input-OnDestroy"] = new Array();
-TabInput["Input-OnUpdate"] = new Array();
-
-//Static input values predefined from the engine
-TabInput["Input-OnCreate"][0] = "Self";
-TabInput["Input-OnCollide"][0] = "Self";
-TabInput["Input-OnDestroy"][0] = "Self";
-TabInput["Input-OnUpdate"][0] = "Self";
-TabInput["Input-OnCollide"][1] = "Entity";
-
 
 $(function() {
 	$(document)[0].mousePosition = {};
@@ -85,7 +68,19 @@ $(function() {
 	
 	FunctionsInit();
 	ComponentsInit();
+	TemplatesInit();
 	
+	TabInput["Input-OnCreate"] = new Array();
+	TabInput["Input-OnCollide"] = new Array();
+	TabInput["Input-OnDestroy"] = new Array();
+	TabInput["Input-OnUpdate"] = new Array();
+
+	//Static input values predefined from the engine
+	TabInput["Input-OnCreate"][0] = "Self";
+	TabInput["Input-OnCollide"][0] = "Self";
+	TabInput["Input-OnDestroy"][0] = "Self";
+	TabInput["Input-OnUpdate"][0] = "Self";
+	TabInput["Input-OnCollide"][1] = "Entity";
 
 	//Click function for TabInput boxes
 	$(".TabInput").click(function() {
