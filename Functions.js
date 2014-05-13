@@ -77,7 +77,7 @@ var FunctionsInit = function() {
 				if($(this)[0].ui.helper.offset().left - $(currentTab).offset().left > -100)
 					$("<div class='block ui-widget-content ui-draggable'>").html($(this).html()).appendTo(currentTab).draggable({
 						stack: 'div',
-						start: function(e){
+						start: function(e){						
 							$("#TempArea").css("left", $(this).parent().parent().offset().left);
 							$("#TempArea").css("top", $(this).parent().parent().offset().top);
 							$("#TempArea").css("width", $(this).parent().parent().width());
