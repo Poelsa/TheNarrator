@@ -94,11 +94,8 @@ $(function() {
 	//	//TODO: få fram pop-up av input property sheet där man kan definiera input
 	//});
 
-	$('.TabInput').editable(function(value, settings){
+	$('.portOut').editable(function(value, settings){
 		return (value);
-	},
-	{
-		type : 'select'
 	});
 	
 	
