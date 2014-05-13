@@ -2,8 +2,9 @@ var ComponentsInit = function() {
 	var components = {};
 
 	components.Entity = {
-		id 		: "Entity",
-		entity 	: ["Entity", "Entity"]
+	id : "Entity",
+	entity : ["Entity", "Entity"],
+	tooltip : "Entity"
 	};
 
 	components.Transform = {
@@ -72,7 +73,7 @@ var ComponentsInit = function() {
 						stop: function(e){
 							$(this).parent().children().appendTo(currentTab);
 							}
-					}).tooltip({ hide: { effect: "explode", duration: 1000 } })
+					}).tooltip({ content: "asdf" })
 					.css("top", $(this)[0].ui.helper.offset().top - $(currentTab).offset().top)
 					.css("left", $(this)[0].ui.helper.offset().left - $(currentTab).offset().left)
 					.hover().css("cursor","pointer")

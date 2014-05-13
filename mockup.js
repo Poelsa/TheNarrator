@@ -88,11 +88,11 @@ $(function() {
 	$("#Workspace").get(0).scale = 1;
 	$("#Workspace>div").bind("mousewheel", function(event){
 		var delta = event.originalEvent.wheelDelta;
-		if(delta > 0) {
+		if(delta > 0 && $("#Workspace").get(0).scale < 1) {
 			$("#Workspace").get(0).scale += 0.1;
 			$("#TempArea").get(0).scale += 0.1;
 		}
-		else if(delta < 0) {
+		else if(delta < 0 && $("#Workspace").get(0).scale > 0.1) {
 			$("#Workspace").get(0).scale -= 0.1;
 			$("#TempArea").get(0).scale -= 0.1;
 		}
