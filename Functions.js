@@ -52,6 +52,11 @@ var FunctionsInit = function() {
 	invalue7: "bool" //Den som inte den ovan är.
 	};
 	
+	functions.IfStatement = {
+	id: "If-statement",
+	conditions: []
+	};
+	
 	for(var prop in functions)
 		$("<div class='functions'>").html(functions[prop].id).appendTo("#Elements-Functions").mousedown(function(){
 			$("#TempArea").css("left", $(this).parent().offset().left);
