@@ -116,10 +116,14 @@ var FunctionsInit = function() {
 					}
 					for (var index in $(this)[0].func.outVar)
 					{
-						newblock.append("<div class=\"portOut\">" + $(this)[0].func.outVar[index] + "</div>").editable(function(value, settings){
+						$("<div class=\"portOut\">" + $(this)[0].func.outVar[index] + "</div>")
+            .appendTo(newblock)
+            .editable(function(value, settings){
               return (value);
             },
             {
+              event: "dblclick",
+              style: "display: inline-block"
             });
 					}
 				}
