@@ -64,11 +64,8 @@ function addDraggableElement(New, Name)
 							templates["Workspace-" + numTemplates] = {id : "Workspace-" + numTemplates};
 							addDraggableElement(false, templates["Workspace-" + numTemplates].id);
 							numTemplates++;
-						}
-						
-						}
-						
-				
+						}						
+					}				
 				$(this).parent().children().appendTo($(this).get(0).originalParent);
 				return true; // revert
 			},

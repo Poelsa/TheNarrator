@@ -67,16 +67,16 @@ $(function() {
 	ComponentsInit();
 	TemplatesInit();
 	
-	TabInput["Input-OnCreate"] = new Array();
+	TabInput["Input-OnCreate"] 	= new Array();
 	TabInput["Input-OnCollide"] = new Array();
 	TabInput["Input-OnDestroy"] = new Array();
-	TabInput["Input-OnUpdate"] = new Array();
+	TabInput["Input-OnUpdate"] 	= new Array();
 
 	//Static input values predefined from the engine
-	TabInput["Input-OnCreate"][0] = "Self";
+	TabInput["Input-OnCreate"] [0] = "Self";
 	TabInput["Input-OnCollide"][0] = "Self";
 	TabInput["Input-OnDestroy"][0] = "Self";
-	TabInput["Input-OnUpdate"][0] = "Self";
+	TabInput["Input-OnUpdate"] [0] = "Self";
 	TabInput["Input-OnCollide"][1] = "Entity";
 
 	//Click function for TabInput boxes
