@@ -89,11 +89,19 @@ $(function() {
 	
 
 	//Click function for TabInput boxes
-	$(".TabInput").click(function() {
-		alert(TabInput[$(this).attr('id')][0]); //Test, remove once done
-		//TODO: få fram pop-up av input property sheet där man kan definiera input
-	});
+	//$(".TabInput").click(function() {
+	//	alert(TabInput[$(this).attr('id')][0]); //Test, remove once done
+	//	//TODO: få fram pop-up av input property sheet där man kan definiera input
+	//});
 
+	$('.TabInput').editable(function(value, settings){
+		return (value);
+	},
+	{
+		type : 'select'
+	});
+	
+	
 	/*
 	// Zoom functionality
 	$("#Workspace").get(0).scale = 1;

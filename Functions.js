@@ -40,7 +40,7 @@ var FunctionsInit = function() {
 	id: "BindSphereShape",
 	accessor: "PhysicsComponent",
 	inVar : [ "CollisionComponent", "vector3",  "quarternion",
-				"float", "float", "bool", "bool"]
+				"float", "float", "bool", "bool" ]
 	};
 	
 	for(var prop in functions)
@@ -121,7 +121,7 @@ var FunctionsInit = function() {
 			},
 			helper: "clone",
 			revertDuration: 0
-		}).hover().css("cursor", "pointer")[0].func = functions[prop];
+		}).hover().css("cursor", "pointer")[0].func = functions[prop];		
 };
 
 /* This code should be called when creating a new block which has in and out ports
