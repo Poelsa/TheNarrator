@@ -58,7 +58,7 @@ var FunctionsInit = function() {
 	};
 	
 	for(var prop in functions)
-		$("<div class='functions'>").html(functions[prop].id).appendTo("#Elements-Functions").mousedown(function(){
+		$("<div class='functions'>").html("<span id = " + functions[prop].id + ">"+functions[prop].id+"</span>").appendTo("#Elements-Functions").mousedown(function(){
 			$("#TempArea").css("left", $(this).parent().offset().left);
 			$("#TempArea").css("top", $(this).parent().offset().top);
 			$("#TempArea").css("width", $(this).parent().width());
@@ -93,9 +93,11 @@ var FunctionsInit = function() {
 					.css("top", $(this)[0].ui.helper.offset().top - $(currentTab).offset().top)
 					.css("left", $(this)[0].ui.helper.offset().left - $(currentTab).offset().left)
 					.css("cursor","pointer")
+					//.css("font-size", (202/236)*16+"px")
 					.click(selectFunc);
 				
 				$(this).parent().children().appendTo($(this).get(0).originalParent);
+
 				return true; // revert
 			},
 			helper: "clone",

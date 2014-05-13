@@ -55,7 +55,7 @@ BODY
 }
 #Elements
 {
-  height: 50%;
+  height: 100%;
   padding: 0;
   -webkit-box-sizing: border-box;
 }
@@ -108,6 +108,7 @@ BODY
   width: 100%;
   height: 100%;
   overflow: hidden;
+
 }
 #TempArea
 {
@@ -122,14 +123,20 @@ BODY
 }
 .block
 {
+  border-radius: 0.5em;
+  text-align: center;
   display: inline-block;
   width: 200px;
   height: 200px;
   position: absolute;
   z-index: 1;
+  font-size: 14
+ 
 }
 .variable
 {
+  border-radius: 0.7em;
+  text-align: center;
   display: inline-block;
   width: 125px;
   height: 100px;
@@ -149,5 +156,6 @@ BODY
 }
 .selected
 {
-  border-color: cyan;
+  border-color: DarkGoldenRod;
+
 }
