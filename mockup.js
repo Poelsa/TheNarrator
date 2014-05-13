@@ -98,7 +98,6 @@ $(function() {
 		return (value);
 	},
 	{
-		type : 'select'
 	});
 	
 	
