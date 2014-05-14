@@ -6,7 +6,7 @@ $(function() {
         $(document)[0].mousePosition.x = event.pageX;
         $(document)[0].mousePosition.y = event.pageY;
     });
-	
+
 	$("#Elements").tabs();
 	$("#Overview").tabs();
 	$("#SideBar").droppable({
@@ -111,9 +111,14 @@ $(function() {
 	{
 		TabInput[TabID] = InputArray;
 	}
+
+	$(".TabInput").attr("title", "")
+	.tooltip({
+		content: "Incoming parameters"
+	});
 });
 
-//Trying to get selection to work
+//Selection
 var classHighlight = "selected";
 var $currentSelected;
 var selectFunc = function(event) {

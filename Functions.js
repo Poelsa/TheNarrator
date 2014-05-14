@@ -1,6 +1,7 @@
 var FunctionsInit = function() {
 	var functions = {};
 	functions.NewEntity = {
+		tip: "This will create a new entity",
 		id : "NewEntity",
 		returnvalue : "Entity"
 	};
@@ -89,7 +90,9 @@ var FunctionsInit = function() {
 						stop: function(e){
 							$(this).parent().children().appendTo(currentTab);
 							}
-					}).tooltip({ hide: { effect: "explode", duration: 1000 } })
+					})
+					.attr("title","")
+					.tooltip({content: $(this)[0].func.tip})
 					.css("top", $(this)[0].ui.helper.offset().top - $(currentTab).offset().top)
 					.css("left", $(this)[0].ui.helper.offset().left - $(currentTab).offset().left)
 					.css("cursor","pointer")
@@ -102,6 +105,7 @@ var FunctionsInit = function() {
 			},
 			helper: "clone",
 			revertDuration: 0
-		}).hover().css("cursor", "pointer");
+		}).hover().css("cursor", "pointer")
+		.get(0).func = functions[prop];
 	}
 };

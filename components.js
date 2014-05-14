@@ -2,9 +2,9 @@ var ComponentsInit = function() {
 	var components = {};
 
 	components.Entity = {
+	tip : "An entity",
 	id : "Entity",
-	entity : ["Entity", "Entity"],
-	tooltip : "Entity"
+	entity : ["Entity", "Entity"]
 	};
 
 	components.Transform = {
@@ -73,18 +73,21 @@ var ComponentsInit = function() {
 						stop: function(e){
 							$(this).parent().children().appendTo(currentTab);
 							}
-					}).tooltip({ content: "asdf" })
+					})
+					.attr("title","")
+					.tooltip({content: $(this)[0].component.tip})
 					.css("top", $(this)[0].ui.helper.offset().top - $(currentTab).offset().top)
 					.css("left", $(this)[0].ui.helper.offset().left - $(currentTab).offset().left)
 					.hover().css("cursor","pointer")
 					.click(selectFunc);
 				
 				$(this).parent().children().appendTo($(this).get(0).originalParent);
-				
+					
 				return true; // revert
 			},
 			helper: "clone",
 			revertDuration: 0
-		}).hover().css("cursor", "pointer");
+		}).hover().css("cursor", "pointer")
+		.get(0).component = components[prop]
 	}
 };
