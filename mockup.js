@@ -1,6 +1,11 @@
 var SelectedItems = [];
 
 $(function() {
+	$("#Workspace>div").each(function(){
+		this.renderer = Raphael(this,$(this).width(),$(this).height());
+	});
+	
+	// Keep current mouse position accessible from everywhere
 	$(document)[0].mousePosition = {};
 	$(document).mousemove(function(event) {
         $(document)[0].mousePosition.x = event.pageX;
@@ -30,13 +35,13 @@ $(function() {
 	// Move the whole workspace
 	$("#Workspace").mousedown(function(event){		
 		var currentTab = $("#Workspace>div")[$("#Workspace").tabs("option", "active")];
-		if(event.target == currentTab) {
+		//if(event.target == currentTab) {
 			$("#Workspace").get(0).drag = true;
 			$("#Workspace").css("cursor","move")
 			$("#Workspace").get(0).positionX = event.pageX;
 			$("#Workspace").get(0).positionY = event.pageY;
 			event.preventDefault();
-		}
+		//}
 	});
 	
 	$("#Workspace").mouseup(function(event){
@@ -51,8 +56,8 @@ $(function() {
 			var currentTab = $("#Workspace>div")[$("#Workspace").tabs("option", "active")];
 			$(currentTab).children().each(function(index,element){
 				if($(this).attr("role") != "tab") {
-					$(this).css('top', parseInt($(this).css('top'))+event.pageY-$("#Workspace").get(0).positionY);
-					$(this).css('left', parseInt($(this).css('left'))+event.pageX-$("#Workspace").get(0).positionX);
+					$(this).css('top', parseInt($(this).css('top'))+(event.pageY-$("#Workspace").get(0).positionY)/currentTab.scale);
+					$(this).css('left', parseInt($(this).css('left'))+(event.pageX-$("#Workspace").get(0).positionX)/currentTab.scale);
 				}
 			});
 			$("#Workspace").get(0).positionX = event.pageX;
@@ -85,19 +90,27 @@ $(function() {
 	});
 	
 	// Zoom functionality
-	$("#Workspace").get(0).scale = 1;
-	$("#Workspace>div").bind("mousewheel", function(event){
+	$("#Workspace>div").each(function(){this.scale = 1;});
+	$("#TempArea").get(0).scale = 1;
+	$("#Workspace").bind("mousewheel", function(event){
+		var currentTab = $("#Workspace>div")[$("#Workspace").tabs("option", "active")];
 		var delta = event.originalEvent.wheelDelta;
-		if(delta > 0 && $("#Workspace").get(0).scale < 1) {
-			$("#Workspace").get(0).scale += 0.1;
+		if(delta > 0 && currentTab.scale < 1) {
+			currentTab.scale += 0.1;
 			$("#TempArea").get(0).scale += 0.1;
 		}
-		else if(delta < 0 && $("#Workspace").get(0).scale > 0.1) {
-			$("#Workspace").get(0).scale -= 0.1;
+		else if(delta < 0 && currentTab.scale > 0.1) {
+			currentTab.scale -= 0.1;
 			$("#TempArea").get(0).scale -= 0.1;
+			/*if($(currentTab).width() * currentTab.scale < $("#Workspace").width()) {
+				$(currentTab).width(100/currentTab.scale + "%");
+				$(currentTab).height(100/currentTab.scale + "%");
+			
+			}*/
 		}
-		$(this).css('transform', 'scale('+$("#Workspace").get(0).scale+')');
-		$(this).css('transform', 'scale('+$("#TempArea").get(0).scale+')');
+		$(currentTab).css('transform', 'scale('+currentTab.scale+')');
+		$("#TempArea").css('transform', 'scale('+$("#TempArea").get(0).scale+')');
+		
 		event.preventDefault();
 	});
 

@@ -69,7 +69,7 @@ var ComponentsInit = function() {
 							$("#TempArea").css("margin", "1px"); // compensate for #Workspace's border
 							$(this).get(0).originalParent = $(this).parent();
 							$(this).parent().children().appendTo("#TempArea");
-							},
+						},
 						stop: function(e){
 							$(this).parent().children().appendTo(currentTab);
 							}
@@ -79,7 +79,8 @@ var ComponentsInit = function() {
 					.css("top", $(this)[0].ui.helper.offset().top - $(currentTab).offset().top)
 					.css("left", $(this)[0].ui.helper.offset().left - $(currentTab).offset().left)
 					.hover().css("cursor","pointer")
-					.click(selectFunc);
+					.click(selectFunc)
+					.mousedown(function(e){e.stopPropagation();});
 				
 				$(this).parent().children().appendTo($(this).get(0).originalParent);
 					

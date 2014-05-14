@@ -4,6 +4,11 @@ BODY
   color: white;
   margin: 0;
 }
+.clear
+{
+	position: relative;
+	clear: both;
+}
 
 #ToolBar
 {
@@ -107,8 +112,13 @@ BODY
 {
   width: 100%;
   height: 100%;
-  overflow: hidden;
-
+  border-width: 2;
+  border-color: cyan;
+}
+SVG
+{
+	position: absolute;
+	z-index: 0;
 }
 #TempArea
 {
@@ -142,6 +152,50 @@ BODY
   height: 100px;
   position: absolute;
   z-index: 1;
+}
+.portIn, .portOut
+{
+	position: relative;
+	font-size: 12px;
+	font-family: Courier;
+}
+.portIn:hover, .portOut:hover
+{
+	background-color: rgba(255,255,255,0.1);
+}
+.portIn:before, .portOut:after
+{
+	width: 10px;
+	height: 10px;
+	display: inline-block;
+	vertical-align: middle;
+	border-radius: 5px;
+	content: "";
+	position: relative;
+}
+.portIn
+{
+	text-align: left;
+	float: left;
+	clear: left;
+	padding-right: 5px;
+}
+.portIn:before
+{
+	background: blue;
+	left: -6px;
+}
+.portOut
+{
+	text-align: right;
+	float: right;
+	clear: right;
+	padding-left: 5px;
+}
+.portOut:after
+{
+	background: red;
+	left: 6px;
 }
 .TabInput
 {

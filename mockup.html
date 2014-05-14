@@ -7,19 +7,16 @@
 	
     <script src="js/jquery-1.10.2.js"></script>
     <script src="js/jquery-ui-1.10.4.custom.js"></script>
-
+    <script src="js/raphael-min.js"></script>
+    <script src="Line.js"></script>
+    <script src="Port.js"></script>
     <script src="components.js"></script>
-
-	<script src="Templates.js"></script>
-	<script src="Functions.js"></script>
-
+		<script src="Templates.js"></script>
+		<script src="Functions.js"></script>
     <script src="mockup.js"></script>
-	
-	
   </head>
   
   <body>
-	
     <ul id="ToolBar" class="ui-widget ui-helper-clearfix"> <!-- http://en.wikipedia.org/wiki/Menu_bar -->
       <li class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-document"></span>New</li>
       <li class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-folder-open"></span>Open</li>
@@ -58,36 +55,26 @@
           <li><a href="#Workspace-OnUpdate">OnUpdate</a></li>
         </ul>
         <div id="Workspace-OnCreate">
-
-		  <div class="TabInput ui-widget-content" id="Input-OnCreate">
-			Input goes here!
-		  </div>
-
-        </div>
-        <div id="Workspace-OnCollide">
-			<div class="TabInput ui-widget-content" id="Input-OnCollide">
-			Input goes here!
-			</div>
-
-        </div>
-        <div id="Workspace-OnDestroy">
-			<div class="TabInput ui-widget-content" id="Input-OnDestroy" >
-			Input goes here!
-			</div>
-
-        </div>
-        <div id="Workspace-OnUpdate">
-			<div class="TabInput ui-widget-content" id="Input-OnUpdate" >
-			Input goes here!
-			</div>
-
-       
-
-        </div>
-
-        </div>
+					<div class="TabInput ui-widget-content" id="Input-OnCreate">
+						Input goes here!
+					</div>
+				</div>
+				<div id="Workspace-OnCollide">
+					<div class="TabInput ui-widget-content" id="Input-OnCollide">
+						Input goes here!
+					</div>
+				</div>
+				<div id="Workspace-OnDestroy">
+					<div class="TabInput ui-widget-content" id="Input-OnDestroy" >
+						Input goes here!
+					</div>
+				</div>
+				<div id="Workspace-OnUpdate">
+					<div class="TabInput ui-widget-content" id="Input-OnUpdate" >
+						Input goes here!
+					</div>
+				</div>
       </div>
-    </div>
     <div class="ui-widget ui-tabs-panel" id="TempArea"> <!-- Used by draggables to appear on top of SideBar and Workspaces -->
     </div>
   </body>
