@@ -52,16 +52,34 @@ BODY
   float: left;
   z-index: -1;
 }
+#Overview
+{
+  height: 50%;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+}
 #Elements
 {
   height: 100%;
   padding: 0;
   -webkit-box-sizing: border-box;
 }
-#Elements>div>div
+.functions
 {
-  margin: 2px;
-  padding: 2px;
+  border: 1px solid #404040;
+  background: #121212 url(css/vader/images/ui-bg_gloss-wave_16_121212_500x100.png) 50% top repeat-x;
+  background-size: 100% 100%;
+  color: #eeeeee;
+}
+.components
+{
+  border: 1px solid #404040;
+  background: #121212 url(css/vader/images/ui-bg_gloss-wave_16_121212_500x100.png) 50% top repeat-x;
+  background-size: 100% 100%;
+  color: #eeeeee;
+}
+.templates
+{
   border: 1px solid #404040;
   background: #121212 url(css/vader/images/ui-bg_gloss-wave_16_121212_500x100.png) 50% top repeat-x;
   background-size: 100% 100%;
@@ -105,8 +123,9 @@ SVG
 #TempArea
 {
   position: absolute;
-  top: 54px;
+  top: 84px;
   left: 301px;
+  margin: 1px;
 }
 .ui-tabs-panel
 {
@@ -114,10 +133,25 @@ SVG
 }
 .block
 {
+  border-radius: 0.5em;
+  text-align: center;
   display: inline-block;
-	max-width: 200px;
-	text-align: center;
-	z-index: 1;
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  z-index: 1;
+  font-size: 14
+ 
+}
+.variable
+{
+  border-radius: 0.7em;
+  text-align: center;
+  display: inline-block;
+  width: 125px;
+  height: 100px;
+  position: absolute;
+  z-index: 1;
 }
 .portIn, .portOut
 {
@@ -162,4 +196,19 @@ SVG
 {
 	background: red;
 	left: 6px;
+}
+.TabInput
+{
+  position: absolute;
+  top: 26px;
+  left: 0px;
+  display: inline-block;
+  z-index: 2;
+  width: 100px;
+  height: 75px;
+  margin: 1px;
+}
+.selected
+{
+  border-color: DarkGoldenRod;
 }
