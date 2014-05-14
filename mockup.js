@@ -1,41 +1,17 @@
-var Variables = ["Transform"];
-var Functions = [["Function"], ["Another function"]];
-var Macros = [["Macro"], ["Another macro"]];
-var Templates = [["Template"], ["Another template"]];
-
-var TabInput = new Object();
-
 var SelectedItems = [];
 
-TabInput["Input-OnCreate"] = new Array();
-TabInput["Input-OnCollide"] = new Array();
-TabInput["Input-OnDestroy"] = new Array();
-TabInput["Input-OnUpdate"] = new Array();
-
-//Static input values predefined from the engine
-TabInput["Input-OnCreate"][0] = "Self";
-TabInput["Input-OnCollide"][0] = "Self";
-TabInput["Input-OnDestroy"][0] = "Self";
-TabInput["Input-OnUpdate"][0] = "Self";
-TabInput["Input-OnCollide"][1] = "Entity";
-
-
 $(function() {
-	// Initialize SVG drawing area
 	$("#Workspace>div").each(function(){
 		this.renderer = Raphael(this,$(this).width(),$(this).height());
-		/*var line = new Line("#999999", this.renderer);
-		line.Update({x: 50, y: 100}, {x: 290, y: 500});*/
 	});
-
+	
 	// Keep current mouse position accessible from everywhere
 	$(document)[0].mousePosition = {};
 	$(document).mousemove(function(event) {
-        $(document)[0].mousePosition.x = event.pageX;
-        $(document)[0].mousePosition.y = event.pageY;
-    });
-	
-	// Initialize jQuery UI elements
+		$(document)[0].mousePosition.x = event.pageX;
+		$(document)[0].mousePosition.y = event.pageY;
+	});
+
 	$("#Elements").tabs();
 	$("#Overview").tabs();
 	$("#SideBar").droppable({
@@ -43,7 +19,6 @@ $(function() {
 			ui.draggable.parent().children().appendTo(ui.draggable.get(0).originalParent);
 			if(ui.draggable.hasClass("block") || ui.draggable.hasClass("variable"))
 				ui.draggable.remove();
-			
 		}
 	});
 	
@@ -59,23 +34,31 @@ $(function() {
 	
 	// Move the whole workspace
 	$("#Workspace").mousedown(function(event){
-		$("#Workspace").get(0).drag = true;
-		$("#Workspace").get(0).positionX = event.pageX;
-		$("#Workspace").get(0).positionY = event.pageY;
-		event.preventDefault();
+		var currentTab = $("#Workspace>div")[$("#Workspace").tabs("option", "active")];
+		//if(event.target == currentTab) {
+			$("#Workspace").get(0).drag = true;
+			$("#Workspace").css("cursor","move")
+			$("#Workspace").get(0).positionX = event.pageX;
+			$("#Workspace").get(0).positionY = event.pageY;
+			event.preventDefault();
+		//}
 	});
 	
 	$("#Workspace").mouseup(function(event){
 		$("#Workspace").get(0).drag = false;
+		$("#Workspace").css("cursor","default")
 		event.preventDefault();
 	});
 	
 	$("#Workspace").mousemove(function(event){
 		if($("#Workspace").get(0).drag == true)
-		{
-			$("#Workspace").children().each(function(index,element){
-				$(this).css('top', parseInt($(this).css('top'))+event.pageY-$("#Workspace").get(0).positionY);
-				$(this).css('left', parseInt($(this).css('left'))+event.pageX-$("#Workspace").get(0).positionX);
+		{			
+			var currentTab = $("#Workspace>div")[$("#Workspace").tabs("option", "active")];
+			$(currentTab).children().each(function(index,element){
+				if($(this).attr("role") != "tab") {
+					$(this).css('top', parseInt($(this).css('top'))+(event.pageY-$("#Workspace").get(0).positionY)/currentTab.scale);
+					$(this).css('left', parseInt($(this).css('left'))+(event.pageX-$("#Workspace").get(0).positionX)/currentTab.scale);
+				}
 			});
 			$("#Workspace").get(0).positionX = event.pageX;
 			$("#Workspace").get(0).positionY = event.pageY;
@@ -86,31 +69,56 @@ $(function() {
 	
 	FunctionsInit();
 	ComponentsInit();
+	TemplatesInit();
 	
+	TabInput["Input-OnCreate"] 	= new Array();
+	TabInput["Input-OnCollide"] = new Array();
+	TabInput["Input-OnDestroy"] = new Array();
+	TabInput["Input-OnUpdate"] 	= new Array();
 
-	//Click function for TabInput boxes
-	//$(".TabInput").click(function() {
-	//	alert(TabInput[$(this).attr('id')][0]); //Test, remove once done
-	//	//TODO: få fram pop-up av input property sheet där man kan definiera input
-	//});
 
 	$('.portOut').editable(function(value, settings){
 		return (value);
 	});
 	
 	
-	/*
+	//Static input values predefined from the engine
+	TabInput["Input-OnCreate"] [0] = "Self";
+	TabInput["Input-OnCollide"][0] = "Self";
+	TabInput["Input-OnDestroy"][0] = "Self";
+	TabInput["Input-OnUpdate"] [0] = "Self";
+	TabInput["Input-OnCollide"][1] = "Entity";
+
+	$.each(TabInput["Input-OnCreate"], function(){$("<div class=\"portOut\">").html(this).appendTo("#Input-OnCreate")});
+	$.each(TabInput["Input-OnCollide"], function(){$("<div class=\"portOut\">").html(this).appendTo("#Input-OnCollide")});
+	$.each(TabInput["Input-OnDestroy"], function(){$("<div class=\"portOut\">").html(this).appendTo("#Input-OnDestroy")});
+	$.each(TabInput["Input-OnUpdate"], function(){$("<div class=\"portOut\">").html(this).appendTo("#Input-OnUpdate")});
+	PortProcessing();
+	
 	// Zoom functionality
-	$("#Workspace").get(0).scale = 1;
-	$("#Workspace>div").bind("mousewheel", function(event){
+	$("#Workspace>div").each(function(){this.scale = 1;});
+	$("#TempArea").get(0).scale = 1;
+	$("#Workspace").bind("mousewheel", function(event){
+		var currentTab = $("#Workspace>div")[$("#Workspace").tabs("option", "active")];
 		var delta = event.originalEvent.wheelDelta;
-		if(delta > 0)
-			$("#Workspace").get(0).scale *= 1.1;
-		else if(delta < 0)
-			$("#Workspace").get(0).scale /= 1.1;
-		$(this).css('transform', 'scale('+$("#Workspace").get(0).scale+')');
+		if(delta > 0 && currentTab.scale < 1) {
+			currentTab.scale += 0.1;
+			$("#TempArea").get(0).scale += 0.1;
+		}
+		else if(delta < 0 && currentTab.scale > 0.1) {
+			currentTab.scale -= 0.1;
+			$("#TempArea").get(0).scale -= 0.1;
+			/*if($(currentTab).width() * currentTab.scale < $("#Workspace").width()) {
+				$(currentTab).width(100/currentTab.scale + "%");
+				$(currentTab).height(100/currentTab.scale + "%");
+			
+			}*/
+		}
+		$(currentTab).css('transform', 'scale('+currentTab.scale+')');
+		$("#TempArea").css('transform', 'scale('+$("#TempArea").get(0).scale+')');
+		
 		event.preventDefault();
-	});*/
+	});
 
 	//Changes all the input values of a Tab
 	function SetTabInput(TabID, InputArray)

@@ -45,8 +45,9 @@ var FunctionsInit = function() {
 	outVar : []
 	};
 	
-	for(var prop in functions)
-		$("<div class='functions'>").html(functions[prop].id).appendTo("#Elements-Functions").mousedown(function(){
+
+	for(var prop in functions) {
+		$("<div class='functions'>").html("<span id = " + functions[prop].id + ">"+functions[prop].id+"</span>").appendTo("#Elements-Functions").mousedown(function(e){
 			$("#TempArea").css("left", $(this).parent().offset().left);
 			$("#TempArea").css("top", $(this).parent().offset().top);
 			$("#TempArea").css("width", $(this).parent().width());
@@ -59,7 +60,7 @@ var FunctionsInit = function() {
 				ui.helper.addClass("block");
 				$(this).get(0).originalParent = $(this).parent();
 				$(this).parent().children().appendTo("#TempArea");
-        ui.helper.append("<br class=\"clear\">");
+				ui.helper.append("<br class=\"clear\">");
 				for (var index in $(this)[0].func.inVar)
 				{
 					ui.helper.append("<div class=\"portIn\">" + $(this)[0].func.inVar[index] + "</div>");
@@ -68,23 +69,6 @@ var FunctionsInit = function() {
 				{
 					ui.helper.append("<div class=\"portOut\">" + $(this)[0].func.outVar[index] + "</div>");
 				}
-			},
-			drag: function(e, ui){
-				// Keep the line start and end updated while dragging
-				var workspace = $($("#Workspace>div")[$("#Workspace").tabs("option", "active")]);
-				$(this).children().filter(".portIn").each(function(){
-					if($(this)[0].line)
-						$(this)[0].line.Update($(this)[0].line.from,
-							{x: $(this).offset().left + 6 - workspace.offset().left,
-							y: $(this).offset().top + $(this).height()/2 - workspace.offset().top});
-				});
-				$(this).children().filter(".portOut").each(function(){
-					if($(this)[0].line)
-						$(this)[0].line.Update(
-							{x: $(this).offset().left + $(this).width() + 6 - workspace.offset().left,
-							y: $(this).offset().top + $(this).height()/2 - workspace.offset().top},
-							$(this)[0].line.to);
-				});
 			},
 			revert: function(){
 				var currentTab = $("#Workspace>div")[$("#Workspace").tabs("option", "active")];
@@ -99,15 +83,37 @@ var FunctionsInit = function() {
 							$("#TempArea").css("margin", "1px"); // compensate for #Workspace's border
 							$(this).get(0).originalParent = $(this).parent();
 							$(this).parent().children().appendTo("#TempArea");
-							},
+						},
+						drag: function(e, ui){
+							// Keep the line start and end updated while dragging
+							var workspace = $($("#Workspace>div")[$("#Workspace").tabs("option", "active")]);
+							$(this).children().filter(".portIn").each(function(){
+								if($(this)[0].line)
+									$(this)[0].line.Update($(this)[0].line.from,
+										{x: $(this).offset().left + 6 - workspace.offset().left,
+										y: $(this).offset().top + $(this).height()/2 - workspace.offset().top});
+							});
+							$(this).children().filter(".portOut").each(function(){
+								if($(this)[0].line)
+								{
+									var port = $(this);
+									$.each($(this)[0].line, function(){this.Update(
+										{x: port.offset().left + port.width() + 6 - workspace.offset().left,
+										y: port.offset().top + port.height()/2 - workspace.offset().top},
+										this.to);
+									});
+								}
+							});
+						},
 						stop: function(e){
 							$(this).parent().children().appendTo(currentTab);
-							}
+						}
 					}).tooltip({ hide: { effect: "explode", duration: 1000 } })
 					.css("top", $(this)[0].ui.helper.offset().top - $(currentTab).offset().top)
 					.css("left", $(this)[0].ui.helper.offset().left - $(currentTab).offset().left)
 					.css("cursor","pointer")
-					.click(selectFunc);
+					.click(selectFunc)
+					.mousedown(function(e){e.stopPropagation();});
 					
 					newblock.append("<br class=\"clear\">");
 					for (var index in $(this)[0].func.inVar)
@@ -124,7 +130,7 @@ var FunctionsInit = function() {
 					}
 					for (var index in $(this)[0].func.outVar)
 					{
-						$("<div class=\"portOut\">" + $(this)[0].func.outVar[index] + "</div>")
+						var port = $("<div class=\"portOut\">" + $(this)[0].func.outVar[index] + "</div>")
 						.appendTo(newblock)
 						.editable(function(value, settings){
 							return (value);
@@ -133,63 +139,16 @@ var FunctionsInit = function() {
 							event: "dblclick",
 							style: "display: inline-block"
 						});
+						PortFunctionality(port);
 					}
 				}
 				
 				$(this).parent().children().appendTo($(this).get(0).originalParent);
+
 				return true; // revert
 			},
 			helper: "clone",
 			revertDuration: 0
-		}).hover().css("cursor", "pointer")[0].func = functions[prop];		
+		}).hover().css("cursor", "pointer")[0].func = functions[prop];
+	};
 };
-
-/* This code should be called when creating a new block which has in and out ports
-
-	$(".portIn, .portOut").bind('mousedown', false);
-	$(".portOut").mousedown(function(e){
-		//alert("mousedown");
-	});
-	$(".portOut").draggable({
-		start: function(e, ui){
-			$(this)[0].line = new Line("red");
-			ui.helper.html("");
-			ui.helper.css("margin", "0");
-			ui.helper.css("padding", "0");
-			ui.helper.css("visibility", "hidden");
-		},
-		drag: function(e, ui){
-			var workspace = $($("#Workspace>div")[$("#Workspace").tabs("option", "active")]);
-			$(this)[0].line.Update(
-				{x: $(this).offset().left + $(this).width() + 6 - workspace.offset().left,
-				y: $(this).offset().top + $(this).height()/2 - workspace.offset().top},
-				{x: ui.helper.offset().left + 6 - workspace.offset().left,
-				y: ui.helper.offset().top + 6 - workspace.offset().top});
-		},
-		stop: function(e, ui){
-			var isAttached = false;
-			
-			// Snap event processing:
-			var draggable = $(this);
-			$.each(draggable.data("ui-draggable").snapElements, function(index, element) {
-				if(!isAttached && element.snapping)
-				{
-					$(element.item)[0].line = draggable[0].line;
-					isAttached = true;
-				}
-				else if(!element.snapping && $(element.item)[0].line == draggable[0].line)
-					$(element.item)[0].line = null;
-			});
-			
-			if(!isAttached)
-				$(this)[0].line.Remove();
-		},
-		helper: "clone",
-		revert: true,
-		revertDuration: 0,
-		cursorAt: {left: 6, top: 6},
-		snap: ".portIn",
-		snapMode: "inner",
-		snapTolerance: 6
-	});
-*/

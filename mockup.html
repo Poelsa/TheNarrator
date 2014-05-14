@@ -10,13 +10,14 @@
 	<script src="js/jquery.jeditable-1.7.1.js"></script>
     <script src="js/raphael-min.js"></script>
     <script src="Line.js"></script>
+    <script src="Port.js"></script>
     <script src="components.js"></script>
+		<script src="Templates.js"></script>
 		<script src="Functions.js"></script>
     <script src="mockup.js"></script>
   </head>
   
   <body>
-	
     <ul id="ToolBar" class="ui-widget ui-helper-clearfix"> <!-- http://en.wikipedia.org/wiki/Menu_bar -->
       <li class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-document"></span>New</li>
       <li class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-folder-open"></span>Open</li>
@@ -31,7 +32,6 @@
           <ul> <!-- Tabs - Var, Func, Macro, Templ -->
             <li><a href="#Elements-Variables">Variables</a></li>
             <li><a href="#Elements-Functions">Functions</a></li>
-            <li><a href="#Elements-Macros">Macros</a></li>
             <li><a href="#Elements-Templates">Templates</a></li>
           </ul>
           <input id="SearchBox"><a type="submit" class="ui-icon ui-icon-search"></a>
@@ -39,17 +39,14 @@
           </div>
           <div id="Elements-Functions">
           </div>
-          <div id="Elements-Macros">
-          </div>
           <div id="Elements-Templates">
           </div>
         </div>
-        <div id="Overview">
+        <!--<div id="Overview">
           Place stuff here
-          </div>
+          </div>-->
         </div>
       </div>
-      
       <div id="Workspace">
         <ul> <!-- Tabs - OnCreate, OnUpdate... -->
           <li><a href="#Workspace-OnCreate">OnCreate</a></li>
@@ -58,124 +55,26 @@
           <li><a href="#Workspace-OnUpdate">OnUpdate</a></li>
         </ul>
         <div id="Workspace-OnCreate">
-<!--
-          <div class="block ui-widget-content" title="Test">
-            Entry Point
-						<br class="clear">
-						<div class="portOut">Port Out</div>
-          </div>
-          <div class="block ui-widget-content">
-            This is a function block
-						<br class="clear">
-						<div class="portIn">Port In</div>
-						<div class="portOut">Port Out</div>
-						<div class="portIn">Port In</div>
-          </div>
-          <div class="block ui-widget-content">
-            This is another function block
-						<br class="clear">
-						<div class="portIn">Port In</div>
-						<div class="portOut">Port Out</div>
-						<div class="portIn">Port In</div>
-						<div class="portOut">Port Out</div>
-						<div class="portIn">Port In</div>
-						<div class="portOut">Port Out</div>
-						<div class="portIn">Port In</div>
-						<div class="portOut">Port Out</div>
-          </div>
-        </div>
-        <div id="Workspace-OnCollide">
-          <div class="block ui-widget-content">
-            This function block does not interfere with the function blocks in other tabs
-          </div>
-        </div>
-        <div id="Workspace-OnDestroy">
-          <div class="block ui-widget-content">
-            Neither does this
-          </div>
-        </div>
-        <div id="Workspace-OnUpdate">
-          <div class="block ui-widget-content">
-           Many blocks, such function, very drag, wow.
-          </div>
-          <div class="block ui-widget-content">
-           Many blocks, such function, very drag, wow.
-          </div>
-          <div class="block ui-widget-content">
-           Many blocks, such function, very drag, wow.
-          </div>
-          <div class="block ui-widget-content">
-           Many blocks, such function, very drag, wow.
-          </div>
-          <div class="block ui-widget-content">
-           Many blocks, such function, very drag, wow.
-          </div>
-          <div class="block ui-widget-content">
-           Many blocks, such function, very drag, wow.
-          </div>
-          <div class="block ui-widget-content">
-           Many blocks, such function, very drag, wow.
-          </div>
-          <div class="block ui-widget-content">
-           Many blocks, such function, very drag, wow.
-          </div>
-          <div class="block ui-widget-content">
-           Many blocks, such function, very drag, wow.
-          </div>
-          <div class="block ui-widget-content">
-           Many blocks, such function, very drag, wow.
-          </div>
-          <div class="block ui-widget-content">
-           Many blocks, such function, very drag, wow.
-          </div>
-          <div class="block ui-widget-content">
-           Many blocks, such function, very drag, wow.
-          </div>
-          <div class="block ui-widget-content">
-           Many blocks, such function, very drag, wow.
-          </div>
-          <div class="block ui-widget-content">
-           Many blocks, such function, very drag, wow.
-          </div>
-          <div class="block ui-widget-content">
-           Many blocks, such function, very drag, wow.
-          </div>
--->
-
-		  <div class="TabInput ui-widget-content" id="Input-OnCreate">
-			Input goes here!
-		  </div>
-
-        </div>
-        <div id="Workspace-OnCollide">
-			<div class="TabInput ui-widget-content" id="Input-OnCollide">
-			Input goes here!
-			</div>
-
-        </div>
-        <div id="Workspace-OnDestroy">
-			<div class="TabInput ui-widget-content" id="Input-OnDestroy" >
-			Input goes here!
-			</div>
-
-        </div>
-        <div id="Workspace-OnUpdate">
-			<div class="TabInput ui-widget-content" id="Input-OnUpdate" >
-			Input goes here!
-			</div>
-
-       
-
-        </div>
-        <div id="Workspace-OnCollide">
-        </div>
-        <div id="Workspace-OnDestroy">
-        </div>
-        <div id="Workspace-OnUpdate">
-
-        </div>
+					<div class="TabInput ui-widget-content" id="Input-OnCreate">
+            Inputs
+					</div>
+				</div>
+				<div id="Workspace-OnCollide">
+					<div class="TabInput ui-widget-content" id="Input-OnCollide">
+            Inputs
+					</div>
+				</div>
+				<div id="Workspace-OnDestroy">
+					<div class="TabInput ui-widget-content" id="Input-OnDestroy" >
+            Inputs
+					</div>
+				</div>
+				<div id="Workspace-OnUpdate">
+					<div class="TabInput ui-widget-content" id="Input-OnUpdate" >
+            Inputs
+					</div>
+				</div>
       </div>
-    </div>
     <div class="ui-widget ui-tabs-panel" id="TempArea"> <!-- Used by draggables to appear on top of SideBar and Workspaces -->
     </div>
   </body>
