@@ -1,12 +1,17 @@
 var SelectedItems = [];
 
 $(function() {
+	$("#Workspace>div").each(function(){
+		this.renderer = Raphael(this,$(this).width(),$(this).height());
+	});
+	
+	// Keep current mouse position accessible from everywhere
 	$(document)[0].mousePosition = {};
 	$(document).mousemove(function(event) {
-        $(document)[0].mousePosition.x = event.pageX;
-        $(document)[0].mousePosition.y = event.pageY;
-    });
-	
+		$(document)[0].mousePosition.x = event.pageX;
+		$(document)[0].mousePosition.y = event.pageY;
+	});
+
 	$("#Elements").tabs();
 	$("#Overview").tabs();
 	$("#SideBar").droppable({
