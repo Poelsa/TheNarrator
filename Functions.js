@@ -58,7 +58,7 @@ var FunctionsInit = function() {
 	
 
 	for(var prop in functions) {
-		$("<div class='functions'>").html("<span id = " + functions[prop].id + ">"+functions[prop].id+"</span>").appendTo("#Elements-Functions").mousedown(function(){
+		$("<div class='functions'>").html("<span id = " + functions[prop].id + ">"+functions[prop].id+"</span>").appendTo("#Elements-Functions").mousedown(function(e){
 			$("#TempArea").css("left", $(this).parent().offset().left);
 			$("#TempArea").css("top", $(this).parent().offset().top);
 			$("#TempArea").css("width", $(this).parent().width());
@@ -70,8 +70,6 @@ var FunctionsInit = function() {
 				ui.helper.addClass("block");
 				$(this).get(0).originalParent = $(this).parent();
 				$(this).parent().children().appendTo("#TempArea");
-			},
-			drag: function(e, ui){
 			},
 			revert: function(){
 				var currentTab = $("#Workspace>div")[$("#Workspace").tabs("option", "active")];
@@ -85,16 +83,17 @@ var FunctionsInit = function() {
 							$("#TempArea").css("margin", "1px"); // compensate for #Workspace's border
 							$(this).get(0).originalParent = $(this).parent();
 							$(this).parent().children().appendTo("#TempArea");
-							},
+						},
 						stop: function(e){
 							$(this).parent().children().appendTo(currentTab);
-							}
+						}
 					}).tooltip({ hide: { effect: "explode", duration: 1000 } })
 					.css("top", $(this)[0].ui.helper.offset().top - $(currentTab).offset().top)
 					.css("left", $(this)[0].ui.helper.offset().left - $(currentTab).offset().left)
 					.css("cursor","pointer")
 					//.css("font-size", (202/236)*16+"px")
-					.click(selectFunc);
+					.click(selectFunc)
+					.mousedown(function(e){e.stopPropagation();});
 				
 				$(this).parent().children().appendTo($(this).get(0).originalParent);
 
