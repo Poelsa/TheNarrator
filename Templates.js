@@ -25,10 +25,13 @@ function addDraggableElement(New, Name)
 				ui.helper.addClass("block");
 				$(this).get(0).originalParent = $(this).parent();
 				$(this).parent().children().appendTo("#TempArea");
+				console.log("Template: start");
 			},
 			drag: function(e, ui){
+				console.log("Template: drag");
 			},
 			revert: function(){
+				console.log("Template: revert");
 				var currentTab = $("#Workspace>div")[$("#Workspace").tabs("option", "active")];
 				if($(this)[0].ui.helper.offset().left - $(currentTab).offset().left > -100)
 					{
@@ -64,11 +67,8 @@ function addDraggableElement(New, Name)
 							templates["Workspace-" + numTemplates] = {id : "Workspace-" + numTemplates};
 							addDraggableElement(false, templates["Workspace-" + numTemplates].id);
 							numTemplates++;
-						}
-						
-						}
-						
-				
+						}						
+					}				
 				$(this).parent().children().appendTo($(this).get(0).originalParent);
 				return true; // revert
 			},

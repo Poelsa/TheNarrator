@@ -8,37 +8,37 @@ var ComponentsInit = function() {
 	};
 
 	components.Transform = {
-	id : "Tranform",
-	pos : ["Position", "vector3"],
-	scale : ["Scale", "vector3"]
+		id 		: "Tranform",
+		pos 	: ["Position", "vector3"],
+		scale	: ["Scale", "vector3"]
 	};
 
 	components.Renderable = {
-	id : "Renderable",
-	model : ["Model", "String"],
-	material : ["Material", "String"],
-	shadowTechnique : ["Shadow Technique", "int"],
-	matDiffuse : ["Material Diffuse", "String"],
-	matSpec : ["Material Specular", "String"],
-	matNormal : ["Material Normal", "String"],
-	matGlow : ["Material Glow", "String"],
-	matEffect : ["Material Effect", "String"]
+		id 				: "Renderable",
+		model 			: ["Model", "String"],
+		material 		: ["Material", "String"],
+		shadowTechnique : ["Shadow Technique", "int"],
+		matDiffuse 		: ["Material Diffuse", "String"],
+		matSpec   		: ["Material Specular", "String"],
+		matNormal 		: ["Material Normal", "String"],
+		matGlow   		: ["Material Glow", "String"],
+		matEffect 		: ["Material Effect", "String"]
 	};
 
 	components.Particle = {
-	id : "Particle",
-	entity : ["Entity", "Entity"],
-	part : ["Particle Emitter", "String"]
+		id 		: "Particle",
+		entity 	: ["Entity", "Entity"],
+		part 	: ["Particle Emitter", "String"]
 	};
 
 	components.Collision = {
-	id : "Collision",
-	entity : ["Entity", "Entity"],
-	number : ["SOMETHING", "int"],
-	bool : ["Collide with something i dont remember", "bool"]
+		id 		: "Collision",
+		entity 	: ["Entity", "Entity"],
+		number 	: ["SOMETHING", "int"],
+		bool 	: ["Collide with something i dont remember", "bool"]
 	};
 
-for(var prop in components)
+	for(var prop in components) {		
 		$("<div class='components'>").html(components[prop].id).appendTo("#Elements-Variables").mousedown(function(){
 			$("#TempArea").css("left", $(this).parent().offset().left);
 			$("#TempArea").css("top", $(this).parent().offset().top);
@@ -86,4 +86,5 @@ for(var prop in components)
 			helper: "clone",
 			revertDuration: 0
 		}).hover().css("cursor", "pointer");
+	}
 };

@@ -1,6 +1,3 @@
-
-
-
 var SelectedItems = [];
 
 $(function() {
@@ -17,7 +14,6 @@ $(function() {
 			ui.draggable.parent().children().appendTo(ui.draggable.get(0).originalParent);
 			if(ui.draggable.hasClass("block") || ui.draggable.hasClass("variable"))
 				ui.draggable.remove();
-			
 		}
 	});
 	
@@ -32,7 +28,7 @@ $(function() {
 	//$("#Workspace").selectable();
 	
 	// Move the whole workspace
-	$("#Workspace").mousedown(function(event){
+	$("#Workspace").mousedown(function(event){		
 		var currentTab = $("#Workspace>div")[$("#Workspace").tabs("option", "active")];
 		//if(event.target == currentTab) {
 			$("#Workspace").get(0).drag = true;
@@ -51,7 +47,7 @@ $(function() {
 	
 	$("#Workspace").mousemove(function(event){
 		if($("#Workspace").get(0).drag == true)
-		{
+		{			
 			var currentTab = $("#Workspace>div")[$("#Workspace").tabs("option", "active")];
 			$(currentTab).children().each(function(index,element){
 				if($(this).attr("role") != "tab") {
@@ -70,16 +66,16 @@ $(function() {
 	ComponentsInit();
 	TemplatesInit();
 	
-	TabInput["Input-OnCreate"] = new Array();
+	TabInput["Input-OnCreate"] 	= new Array();
 	TabInput["Input-OnCollide"] = new Array();
 	TabInput["Input-OnDestroy"] = new Array();
-	TabInput["Input-OnUpdate"] = new Array();
+	TabInput["Input-OnUpdate"] 	= new Array();
 
 	//Static input values predefined from the engine
-	TabInput["Input-OnCreate"][0] = "Self";
+	TabInput["Input-OnCreate"] [0] = "Self";
 	TabInput["Input-OnCollide"][0] = "Self";
 	TabInput["Input-OnDestroy"][0] = "Self";
-	TabInput["Input-OnUpdate"][0] = "Self";
+	TabInput["Input-OnUpdate"] [0] = "Self";
 	TabInput["Input-OnCollide"][1] = "Entity";
 
 	//Click function for TabInput boxes
@@ -113,18 +109,16 @@ $(function() {
 		event.preventDefault();
 	});
 
-
-//Changes all the input values of a Tab
-function SetTabInput(TabID, InputArray)
-{
-	TabInput[TabID] = InputArray;
-}
-//Function that adds a new Tab and pushes a new array of Inputs to the TabInput array
-function AddTab(TabID, InputArray)
-{
-	TabInput[TabID] = InputArray;
-}
-
+	//Changes all the input values of a Tab
+	function SetTabInput(TabID, InputArray)
+	{
+		TabInput[TabID] = InputArray;
+	}
+	//Function that adds a new Tab and pushes a new array of Inputs to the TabInput array
+	function AddTab(TabID, InputArray)
+	{
+		TabInput[TabID] = InputArray;
+	}
 });
 
 //Trying to get selection to work

@@ -1,63 +1,63 @@
 var FunctionsInit = function() {
 	var functions = {};
 	functions.NewEntity = {
-	id : "NewEntity",
-	returnvalue : "Entity"
+		id : "NewEntity",
+		returnvalue : "Entity"
 	};
 
 	functions.NewTransformComponent = {
-	id : "NewTransformComponent",
-	invalue1 : "Entity",
-	returnvalue : "TransformComponent"
-
+		id : "NewTransformComponent",
+		invalue1 : "Entity",
+		returnvalue : "TransformComponent"
 	};
 	
 	functions.NewCollisionComponent = {
-	id: "NewCollisionComponent",
-	invalue1 : "Entity",
-	returnvalue : "CollisionComponent"
+		id: "NewCollisionComponent",
+		invalue1 : "Entity",
+		returnvalue : "CollisionComponent"
 	};
 	
 	functions.NewPhysicsComponent = {
-	id : "NewPhysicsComponent",
-	invalue1 : "Entity",
-	returnvalue : "PhysicsComponent"
+		id : "NewPhysicsComponent",
+		invalue1 : "Entity",
+		returnvalue : "PhysicsComponent"
 	};
 	
 	functions.NewScriptComponent = {
-	id : "NewScriptComponent",
-	invalue1: "Entity",
-	invalue2: "String",
-	returnvalue : "ScriptComponent"
+		id : "NewScriptComponent",
+		invalue1: "Entity",
+		invalue2: "String",
+		returnvalue : "ScriptComponent"
 	};
 	
 	functions.CreatePhysicsHandle = {
-	id: "CreatePhysicsHandle",
-	accessor: "CollisionComponent",
-	invalue1: "Entity",
-	invalue2: "int",  //Type
-	invalue3: "bool", //Externally controlled
-	returnvalue: "int-pointer"
+		id: "CreatePhysicsHandle",
+		accessor: "CollisionComponent",
+		invalue1: "Entity",
+		invalue2: "int",  //Type
+		invalue3: "bool", //Externally controlled
+		returnvalue: "int-pointer"
 	};
 	
 	functions.BindSphereShape = {
-	id: "BindSphereShape",
-	accessor: "PhysicsComponent",
-	invalue1: "CollisionComponent",
-	invalue2: "vector3", //Position
-	invalue3: "quarternion", //Rotation
-	invalue4: "float", //radius
-	invalue5: "float", //mass
-	invalue6: "bool", //no spelare eller no world, kolla i fysiken i no remember
-	invalue7: "bool" //Den som inte den ovan är.
+		id: "BindSphereShape",
+		accessor: "PhysicsComponent",
+		invalue1: "CollisionComponent",
+		invalue2: "vector3", //Position
+		invalue3: "quarternion", //Rotation
+		invalue4: "float", //radius
+		invalue5: "float", //mass
+		invalue6: "bool", //no spelare eller no world, kolla i fysiken i no remember
+		invalue7: "bool" //Den som inte den ovan är.
 	};
 	
 	functions.IfStatement = {
-	id: "If-statement",
-	conditions: []
+		id: "If-statement",
+		conditions: []
 	};
 	
-	for(var prop in functions)
+
+	for(var prop in functions) {
 		$("<div class='functions'>").html("<span id = " + functions[prop].id + ">"+functions[prop].id+"</span>").appendTo("#Elements-Functions").mousedown(function(){
 			$("#TempArea").css("left", $(this).parent().offset().left);
 			$("#TempArea").css("top", $(this).parent().offset().top);
@@ -78,7 +78,7 @@ var FunctionsInit = function() {
 				if($(this)[0].ui.helper.offset().left - $(currentTab).offset().left > -100)
 					$("<div class='block ui-widget-content ui-draggable'>").html($(this).html()).appendTo(currentTab).draggable({
 						stack: 'div',
-						start: function(e){
+						start: function(e){						
 							$("#TempArea").css("left", $(this).parent().parent().offset().left);
 							$("#TempArea").css("top", $(this).parent().parent().offset().top);
 							$("#TempArea").css("width", $(this).parent().parent().width());
@@ -103,4 +103,5 @@ var FunctionsInit = function() {
 			helper: "clone",
 			revertDuration: 0
 		}).hover().css("cursor", "pointer");
+	}
 };
