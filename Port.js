@@ -5,7 +5,14 @@ function PortProcessing()
 	$(".portOut").each(function(){
 		$(this)[0].line = [];
 	});
-	$(".portOut").draggable({
+	PortFunctionality($(".portOut"));
+};
+function PortFunctionality(p_ports)
+{
+	p_ports.each(function(){
+		$(this)[0].line = [];
+	});
+	p_ports.draggable({
 		start: function(e, ui){
 			$(this)[0].line.push(new Line("red"));
 			ui.helper.html("");
@@ -56,4 +63,4 @@ function PortProcessing()
 		snapMode: "inner",
 		snapTolerance: 8
 	});
-}
+};

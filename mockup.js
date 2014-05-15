@@ -33,7 +33,7 @@ $(function() {
 	//$("#Workspace").selectable();
 	
 	// Move the whole workspace
-	$("#Workspace").mousedown(function(event){		
+	$("#Workspace").mousedown(function(event){
 		var currentTab = $("#Workspace>div")[$("#Workspace").tabs("option", "active")];
 		//if(event.target == currentTab) {
 			$("#Workspace").get(0).drag = true;
@@ -76,6 +76,12 @@ $(function() {
 	TabInput["Input-OnDestroy"] = new Array();
 	TabInput["Input-OnUpdate"] 	= new Array();
 
+
+	$('.portOut').editable(function(value, settings){
+		return (value);
+	});
+	
+	
 	//Static input values predefined from the engine
 	TabInput["Input-OnCreate"] [0] = "Self";
 	TabInput["Input-OnCollide"][0] = "Self";
@@ -83,11 +89,11 @@ $(function() {
 	TabInput["Input-OnUpdate"] [0] = "Self";
 	TabInput["Input-OnCollide"][1] = "Entity";
 
-	//Click function for TabInput boxes
-	$(".TabInput").click(function() {
-		alert(TabInput[$(this).attr('id')][0]); //Test, remove once done
-		//TODO: få fram pop-up av input property sheet där man kan definiera input
-	});
+	$.each(TabInput["Input-OnCreate"], function(){$("<div class=\"portOut\">").html(this).appendTo("#Input-OnCreate")});
+	$.each(TabInput["Input-OnCollide"], function(){$("<div class=\"portOut\">").html(this).appendTo("#Input-OnCollide")});
+	$.each(TabInput["Input-OnDestroy"], function(){$("<div class=\"portOut\">").html(this).appendTo("#Input-OnDestroy")});
+	$.each(TabInput["Input-OnUpdate"], function(){$("<div class=\"portOut\">").html(this).appendTo("#Input-OnUpdate")});
+	PortProcessing();
 	
 	// Zoom functionality
 	$("#Workspace>div").each(function(){this.scale = 1;});
