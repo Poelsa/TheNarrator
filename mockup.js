@@ -165,3 +165,17 @@ function disableF5(e) {
 		e.preventDefault(); 
 	}		
 };
+
+//////////////////////////
+// Future, beginning of savefunctionality
+var hasSaved = false;
+function saveData()
+{
+	if(hasSaved === false) {
+		var confirmSave = confirm("Save?");
+		if(confirmSave === true) {
+			//save data
+		}
+	}
+}
+window.onbeforeunload = saveData(); // disabled during debugging
