@@ -9,41 +9,45 @@ var FunctionsInit = function() {
 	};
 
 	functions.NewTransformComponent = {
+	tip: "defines position and rotation of an entity",
 	id : "NewTransformComponent",
-	inVar : [ "Entity" ],
+	inVar : [ ["New","Entity",""] ],
 	OutVar : [ "TransformComponent" ]
 	};
 	
 	functions.NewCollisionComponent = {
+	tip: "Enables a entity to collide",
 	id: "NewCollisionComponent",
-	inVar : [ "Entity" ],
+	inVar : [ ["New","Entity",""] ],
 	outVar : [ "CollisionComponent" ]
 	};
 	
 	functions.NewPhysicsComponent = {
+	tip: "",
 	id : "NewPhysicsComponent",
-	inVar : [ "Entity" ],
+	inVar : [ ["New","Entity",""] ],
 	outVar : ["PhysicsComponent" ]
 	};
 	
 	functions.NewScriptComponent = {
+	tip: "This will create a new entity",
 	id : "NewScriptComponent",
-	inVar : [ "Entity", "String" ],
+	inVar : [ ["New","Entity",""], ["Empty","ScriptName","String"] ],
 	outVar : ["ScriptComponent" ]
 	};
 	
 	functions.CreatePhysicsHandle = {
+	tip: "This will create a new entity",
 	id: "CreatePhysicsHandle",
-	accessor: "CollisionComponent",
-	inVar : [ "Entity", "int", "bool" ],
+	inVar : [ ["New","Entity",""], ["0","Type","int"], ["false","ExternallyControlled","bool"] ],
 	outVar : [ "int-pointer" ]
 	};
 	
 	functions.BindSphereShape = {
+	tip: "This will create a new entity",
 	id: "BindSphereShape",
-	accessor: "PhysicsComponent",
-	inVar : [ "CollisionComponent", "vector3",  "quarternion",
-				"float", "float", "bool", "bool" ],
+	inVar : [ ["New","Entity",""], ["(1,1,1)","Position","vector3"],  ["(1,1,1,1)","Rotation","quarternion"],
+				["1","Radius","float"], ["1","Mass","float"], ["true","CollideWStatic","bool"], ["true","CollideWExternal","bool"] ],
 	outVar : []
 	};
 	
@@ -65,7 +69,7 @@ var FunctionsInit = function() {
 				ui.helper.append("<br class=\"clear\">");
 				for (var index in $(this)[0].func.inVar)
 				{
-					ui.helper.append("<div class=\"portIn\">" + $(this)[0].func.inVar[index] + "</div>");
+					ui.helper.append("<div class=\"portIn\">" + $(this)[0].func.inVar[index][1] + "<br/><a>" + $(this)[0].func.inVar[index][0] + "</a></div>");
 				}
 				for (var index in $(this)[0].func.outVar)
 				{
@@ -122,8 +126,9 @@ var FunctionsInit = function() {
 					newblock.append("<br class=\"clear\">");
 					for (var index in $(this)[0].func.inVar)
 					{
-						$("<div class=\"portIn\">" + $(this)[0].func.inVar[index] + "</div>")
-						.appendTo(newblock)
+						var port = $("<div class=\"portIn\"><div>" + $(this)[0].func.inVar[index][1] + "<br/><a>" + $(this)[0].func.inVar[index][0] + "</a></div></div>")
+						.appendTo(newblock);
+						port.children().children().filter("a")
 						.editable(function(value, settings){
 							return (value);
 						},
@@ -135,14 +140,7 @@ var FunctionsInit = function() {
 					for (var index in $(this)[0].func.outVar)
 					{
 						var port = $("<div class=\"portOut\">" + $(this)[0].func.outVar[index] + "</div>")
-						.appendTo(newblock)
-						.editable(function(value, settings){
-							return (value);
-						},
-						{
-							event: "dblclick",
-							style: "display: inline-block"
-						});
+						.appendTo(newblock);
 						PortFunctionality(port);
 					}
 				}

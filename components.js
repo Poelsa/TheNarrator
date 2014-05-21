@@ -2,40 +2,38 @@ var ComponentsInit = function() {
 	var components = {};
 
 	components.Entity = {
-	tip : "An entity",
+	tip : "This is not the entity you are looking for",
 	id : "Entity",
-	entity : ["Entity", "Entity"]
+	inVar : [],
+	ourVar : ["","Entity"]
 	};
 
 	components.Transform = {
 		id 		: "Tranform",
-		pos 	: ["Position", "vector3"],
-		scale	: ["Scale", "vector3"]
+		inVar : [["(1,1,1)","Position", "vector3"], ["(1,1,1)","Scale", "vector3"]],
+		ourVar : [["Position", "vector3"],["Scale", "vector3"]]
 	};
 
 	components.Renderable = {
 		id 				: "Renderable",
-		model 			: ["Model", "String"],
-		material 		: ["Material", "String"],
-		shadowTechnique : ["Shadow Technique", "int"],
-		matDiffuse 		: ["Material Diffuse", "String"],
-		matSpec   		: ["Material Specular", "String"],
-		matNormal 		: ["Material Normal", "String"],
-		matGlow   		: ["Material Glow", "String"],
-		matEffect 		: ["Material Effect", "String"]
+		inVar			: [["cube","Model", "String"],["cube_material","Material", "String"],["0","Shadow Technique", "int"],
+							["cube_diffuse","Material Diffuse", "String"],["cube_specular","Material Specular", "String"],["cube_normal","Material Normal", "String"],
+							["cube_glow","Material Glow", "String"],["cube_effect","Material Effect", "String"]],
+		outVar			: [["Model", "String"],["Material", "String"],["Shadow Technique", "int"],
+							["Material Diffuse", "String"],["Material Specular", "String"],["Material Normal", "String"],
+							["Material Glow", "String"],["Material Effect", "String"]]
 	};
 
 	components.Particle = {
 		id 		: "Particle",
-		entity 	: ["Entity", "Entity"],
-		part 	: ["Particle Emitter", "String"]
+		inVar 	: [["New","Entity",""],["cube_emitter","Particle Emitter", "String"]],
+		outVar	: [["Particle Emitter", "String"]]
 	};
 
 	components.Collision = {
 		id 		: "Collision",
-		entity 	: ["Entity", "Entity"],
-		number 	: ["SOMETHING", "int"],
-		bool 	: ["Collide with something i dont remember", "bool"]
+		inVar	: [["New","Entity",""],["0","Type", "int"],["false","ExternallyControlled", "bool"]],
+		outVar	: [["Type", "int"],["ExternallyControlled", "bool"]]
 	};
 
 	for(var prop in components) {		
@@ -57,7 +55,7 @@ var ComponentsInit = function() {
 			revert: function(){
 				var currentTab = $("#Workspace>div")[$("#Workspace").tabs("option", "active")];
 				if($(this)[0].ui.helper.offset().left - $(currentTab).offset().left > -100)
-					$("<div class='variable ui-widget-content ui-draggable'>").html($(this).html()).appendTo(currentTab).draggable({
+					var newblock = $("<div class='variable ui-widget-content ui-draggable'>").html($(this).html()).appendTo(currentTab).draggable({
 						stack: 'div',
 						start: function(e){
 							//$(".TabInput").css("top", $(this).parent().parent().offset().top);
@@ -82,6 +80,27 @@ var ComponentsInit = function() {
 					.click(selectFunc)
 					.mousedown(function(e){e.stopPropagation();});
 				
+					newblock.append("<br class=\"clear\">");
+					for (var index in $(this)[0].component.inVar)
+					{
+						var port = $("<div class=\"portIn\"><div>" + $(this)[0].component.inVar[index][1] + "<br/><a>" + $(this)[0].component.inVar[index][0] + "</a></div></div>")
+						.appendTo(newblock);
+						port.children().children().filter("a")
+						.editable(function(value, settings){
+							return (value);
+						},
+						{
+							event: "dblclick",
+							style: "display: inline-block"
+						});
+					}
+					for (var index in $(this)[0].component.outVar)
+					{
+						var port = $("<div class=\"portOut\">" + $(this)[0].component.outVar[index][0] + "</div>")
+						.appendTo(newblock);
+						PortFunctionality(port);
+					}
+					
 				$(this).parent().children().appendTo($(this).get(0).originalParent);
 					
 				return true; // revert
