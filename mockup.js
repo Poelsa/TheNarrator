@@ -1,6 +1,7 @@
 var SelectedItems = [];
 
 $(function() {
+
 	$("#Workspace>div").each(function(){
 		this.renderer = Raphael(this,$(this).width(),$(this).height());
 	});
@@ -146,4 +147,21 @@ var selectFunc = function(event) {
 		$currentSelected.removeClass(classHighlight);
 	$(event.target).addClass(classHighlight);
 	$currentSelected = $(event.target);
+};
+
+// Add a warning on f5 refresh
+$(document).on("keydown", keyDownEvent); // Disable popup by commenting out this row
+function keyDownEvent(e)
+{
+	if ((e.which || e.keyCode) == 116) {
+		disableF5(e);
+	}
+}
+
+function disableF5(e) { 		
+	var confirmDelete = confirm("This will delete all your data. \nPress ok to delete");
+	if (confirmDelete == false) 
+	{
+		e.preventDefault(); 
+	}		
 };
