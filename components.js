@@ -55,6 +55,7 @@ var ComponentsInit = function() {
 			revert: function(){
 				var currentTab = $("#Workspace>div")[$("#Workspace").tabs("option", "active")];
 				if($(this)[0].ui.helper.offset().left - $(currentTab).offset().left > -100)
+				{
 					var newblock = $("<div class='variable ui-widget-content ui-draggable'>").html($(this).html()).appendTo(currentTab).draggable({
 						stack: 'div',
 						start: function(e){
@@ -81,10 +82,11 @@ var ComponentsInit = function() {
 					.mousedown(function(e){e.stopPropagation();});
 				
 					newblock.append("<br class=\"clear\">");
+					var inDiv = $("<div style='float: left;'></div>").appendTo(newblock);
 					for (var index in $(this)[0].component.inVar)
 					{
 						var port = $("<div class=\"portIn\"><div>" + $(this)[0].component.inVar[index][1] + "<br/><a>" + $(this)[0].component.inVar[index][0] + "</a></div></div>")
-						.appendTo(newblock);
+						.appendTo(inDiv);
 						port.children().children().filter("a")
 						.editable(function(value, settings){
 							return (value);
@@ -94,14 +96,16 @@ var ComponentsInit = function() {
 							style: "display: inline-block"
 						});
 					}
+					var outDiv = $("<div style='float: right;'></div>").appendTo(newblock);
 					for (var index in $(this)[0].component.outVar)
 					{
 						var port = $("<div class=\"portOut\">" + $(this)[0].component.outVar[index][0] + "</div>")
-						.appendTo(newblock);
+						.appendTo(outDiv);
 						PortFunctionality(port);
 					}
 					
-				$(this).parent().children().appendTo($(this).get(0).originalParent);
+					$(this).parent().children().appendTo($(this).get(0).originalParent);
+				}
 					
 				return true; // revert
 			},
