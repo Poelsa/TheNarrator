@@ -33,35 +33,40 @@ $(function() {
 	//$("#Workspace").selectable();
 	
 	// Move the whole workspace
-	$("#Workspace").mousedown(function(event){
+	$("#Workspace>div").mousedown(function(event){
 		var currentTab = $("#Workspace>div")[$("#Workspace").tabs("option", "active")];
 		//if(event.target == currentTab) {
-			$("#Workspace").get(0).drag = true;
-			$("#Workspace").css("cursor","move")
-			$("#Workspace").get(0).positionX = event.pageX;
-			$("#Workspace").get(0).positionY = event.pageY;
+			currentTab.drag = true;
+			$("#Workspace>div").css("cursor","move")
+			currentTab.positionX = event.pageX;
+			currentTab.positionY = event.pageY;
 			event.preventDefault();
 		//}
 	});
 	
 	$("#Workspace").mouseup(function(event){
-		$("#Workspace").get(0).drag = false;
-		$("#Workspace").css("cursor","default")
+		var currentTab = $("#Workspace>div")[$("#Workspace").tabs("option", "active")];
+		currentTab.drag = false;
+		$("#Workspace>div").css("cursor","default")
 		event.preventDefault();
 	});
 	
-	$("#Workspace").mousemove(function(event){
-		if($("#Workspace").get(0).drag == true)
+	$("#Workspace>div").mousemove(function(event){
+		var currentTab = $("#Workspace>div")[$("#Workspace").tabs("option", "active")];
+		if(currentTab.drag == true)
 		{			
-			var currentTab = $("#Workspace>div")[$("#Workspace").tabs("option", "active")];
-			$(currentTab).children().each(function(index,element){
+			$(currentTab).children().filter(":not(svg)").each(function(index,element){
 				if($(this).attr("role") != "tab") {
-					$(this).css('top', parseInt($(this).css('top'))+(event.pageY-$("#Workspace").get(0).positionY)/currentTab.scale);
-					$(this).css('left', parseInt($(this).css('left'))+(event.pageX-$("#Workspace").get(0).positionX)/currentTab.scale);
+					$(this).css('top', parseInt($(this).css('top'))+(event.pageY-currentTab.positionY)/currentTab.scale);
+					$(this).css('left', parseInt($(this).css('left'))+(event.pageX-currentTab.positionX)/currentTab.scale);
 				}
 			});
-			$("#Workspace").get(0).positionX = event.pageX;
-			$("#Workspace").get(0).positionY = event.pageY;
+			currentTab.positionX = event.pageX;
+			currentTab.positionY = event.pageY;
+			$(currentTab).children().filter(".block").each(function(){
+				UpdatePortLines(this);
+			});
+			UpdatePortLines($(currentTab).children().filter(".TabInput")[0]);
 			event.preventDefault();
 		}
 	});
@@ -119,7 +124,9 @@ $(function() {
 		
 		event.preventDefault();
 	});
-
+	
+	//var teasdfasd = $($("#Workspace>div")[$("#Workspace").tabs("option", "active")]).clone();
+	//var hej;
 	//Changes all the input values of a Tab
 	function SetTabInput(TabID, InputArray)
 	{

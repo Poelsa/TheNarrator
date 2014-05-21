@@ -35,3 +35,25 @@ var Line = function(styling, renderer)
 		this.line.remove();
 	}
 };
+
+function UpdatePortLines(element)
+{
+	var workspace = $($("#Workspace>div")[$("#Workspace").tabs("option", "active")]);
+	$(element).children().filter(".portIn").each(function(){
+		if($(this)[0].line)
+			$(this)[0].line.Update($(this)[0].line.from,
+				{x: $(this).offset().left + 6 - workspace.offset().left,
+				y: $(this).offset().top + $(this).height()/2 - workspace.offset().top});
+	});
+	$(element).children().filter(".portOut").each(function(){
+		if($(this)[0].line)
+		{
+			var port = $(this);
+			$.each($(this)[0].line, function(){this.Update(
+				{x: port.offset().left + port.width() + 6 - workspace.offset().left,
+				y: port.offset().top + port.height()/2 - workspace.offset().top},
+				this.to);
+			});
+		}
+	});
+}

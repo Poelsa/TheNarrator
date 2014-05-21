@@ -122,6 +122,8 @@ SVG
 {
 	position: absolute;
 	z-index: 0;
+  top: 0px;
+  left: 0px;
 }
 #TempArea
 {
