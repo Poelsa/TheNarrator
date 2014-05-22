@@ -39,13 +39,13 @@ var Line = function(styling, renderer)
 function UpdatePortLines(element)
 {
 	var workspace = $($("#Workspace>div")[$("#Workspace").tabs("option", "active")]);
-	$(element).children().filter(".portIn").each(function(){
+	$(element).children().children().filter(".portIn").each(function(){
 		if($(this)[0].line)
 			$(this)[0].line.Update($(this)[0].line.from,
 				{x: $(this).offset().left + 6 - workspace.offset().left,
 				y: $(this).offset().top + $(this).height()/2 - workspace.offset().top});
 	});
-	$(element).children().filter(".portOut").each(function(){
+	$(element).children().children().filter(".portOut").each(function(){
 		if($(this)[0].line)
 		{
 			var port = $(this);

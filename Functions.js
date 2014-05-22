@@ -87,9 +87,9 @@ var FunctionsInit = function() {
 					var newblock = $("<div class='block ui-widget-content ui-draggable'>").html($(this).html()).appendTo(currentTab).draggable({
 						stack: 'div',
 						start: function(e){
-							$("#TempArea").css("left", $(this).parent().parent().offset().left);
-							$("#TempArea").css("top", $(this).parent().parent().offset().top);
-							$("#TempArea").css("width", $(this).parent().parent().width());
+							$("#TempArea").css("left", $(this).parent().offset().left);
+							$("#TempArea").css("top", $(this).parent().offset().top);
+							$("#TempArea").css("width", $(this).parent().width());
 							$("#TempArea").css("margin", "1px"); // compensate for #Workspace's border
 							$(this).get(0).originalParent = $(this).parent();
 							$(this).parent().children().appendTo("#TempArea");

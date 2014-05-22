@@ -68,7 +68,7 @@ $(function() {
 			});
 			currentTab.positionX = event.pageX;
 			currentTab.positionY = event.pageY;
-			$(currentTab).children().filter(".block").each(function(){
+			$(currentTab).children().filter(".block, .variable").each(function(){
 				UpdatePortLines(this);
 			});
 			UpdatePortLines($(currentTab).children().filter(".TabInput")[0]);
@@ -99,10 +99,14 @@ $(function() {
 	TabInput["Input-OnUpdate"] [0] = ["Self", "Entity"];
 	TabInput["Input-OnCollide"][1] = ["Collider", "Entity"];
 
-	$.each(TabInput["Input-OnCreate"], function(){$("<div class=\"portOut\" type=\""+this[1]+"\">").html(this[0]).appendTo("#Input-OnCreate")});
-	$.each(TabInput["Input-OnCollide"], function(){$("<div class=\"portOut\" type=\""+this[1]+"\">").html(this[0]).appendTo("#Input-OnCollide")});
-	$.each(TabInput["Input-OnDestroy"], function(){$("<div class=\"portOut\" type=\""+this[1]+"\">").html(this[0]).appendTo("#Input-OnDestroy")});
-	$.each(TabInput["Input-OnUpdate"], function(){$("<div class=\"portOut\" type=\""+this[1]+"\">").html(this[0]).appendTo("#Input-OnUpdate")});
+	var portDiv = $("<div style=\"float: right;\">").appendTo("#Input-OnCreate");
+	$.each(TabInput["Input-OnCreate"], function(){$("<div class=\"portOut\" type=\""+this[1]+"\">").html(this[0]).appendTo(portDiv)});
+	portDiv = $("<div style=\"float: right;\">").appendTo("#Input-OnCollide");
+	$.each(TabInput["Input-OnCollide"], function(){$("<div class=\"portOut\" type=\""+this[1]+"\">").html(this[0]).appendTo(portDiv)});
+	portDiv = $("<div style=\"float: right;\">").appendTo("#Input-OnDestroy");
+	$.each(TabInput["Input-OnDestroy"], function(){$("<div class=\"portOut\" type=\""+this[1]+"\">").html(this[0]).appendTo(portDiv)});
+	portDiv = $("<div style=\"float: right;\">").appendTo("#Input-OnUpdate");
+	$.each(TabInput["Input-OnUpdate"], function(){$("<div class=\"portOut\" type=\""+this[1]+"\">").html(this[0]).appendTo(portDiv)});
 	PortProcessing();
 	
 	// Zoom functionality

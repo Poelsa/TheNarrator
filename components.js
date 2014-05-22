@@ -62,12 +62,16 @@ var ComponentsInit = function() {
 							//$(".TabInput").css("top", $(this).parent().parent().offset().top);
 							//$(".TabInput").css("left", $(this).parent().parent().offset().left);
 							$(".TabInput").css("margin", "1px");
-							$("#TempArea").css("left", $(this).parent().parent().offset().left);
-							$("#TempArea").css("top", $(this).parent().parent().offset().top);
-							$("#TempArea").css("width", $(this).parent().parent().width());
+							$("#TempArea").css("left", $(this).parent().offset().left);
+							$("#TempArea").css("top", $(this).parent().offset().top);
+							$("#TempArea").css("width", $(this).parent().width());
 							$("#TempArea").css("margin", "1px"); // compensate for #Workspace's border
 							$(this).get(0).originalParent = $(this).parent();
 							$(this).parent().children().appendTo("#TempArea");
+						},
+						drag: function(e, ui){
+							// Keep the line start and end updated while dragging
+							UpdatePortLines(this);
 						},
 						stop: function(e){
 							$(this).parent().children().appendTo(currentTab);
