@@ -119,31 +119,3 @@ var ComponentsInit = function() {
 		.get(0).component = components[prop]
 	}
 };
-
-function checkColor(varType)
-{
-	if(varType == "Entity")
-		return "OrangeRed";
-	else if(varType == "vector3")
-		return "OliveDrab";
-	else if(varType == "int")
-		return "MidnightBlue";
-	else if(varType == "string")
-		return "Khaki";
-	else if(varType == "quaternion")
-		return "MediumSpringGreen";
-	else if(varType == "bool")
-		return "NavajoWhite";
-	else if(varType == "float")
-		return "DarkSalmon";
-	else if(varType == "TransformComponent")
-		return "LightSteelBlue";
-	else if(varType == "CollisionComponent")
-		return "Lime";
-	else if(varType == "PhysicsComponent")
-		return "Sienna";
-	else if(varType == "ScriptComponent")
-		return "Tomato";
-	else if(varType == "int-pointer")
-		return "Fuchsia";
-}

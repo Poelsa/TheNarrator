@@ -145,8 +145,8 @@ SVG
   min-width: 200px;
   position: absolute;
   z-index: 1;
-  font-size: 14
-
+  font-size: 14;
+  border-color: #40A040;
 }
 .variable
 {
@@ -157,6 +157,7 @@ SVG
 	position: absolute;
 	z-index: 1;
   min-width: 125px;
+  border-color: #4040D0;
 }
 .portIn, .portOut
 {
@@ -216,6 +217,11 @@ SVG
 {
 	left: 6px;
 }
+.portOut[type="Flow"]:after,
+.portIn[type="Flow"]:before
+{
+	background: Gray;
+}
 .portOut[type="Entity"]:after,
 .portIn[type="Entity"]:before
 {
@@ -229,7 +235,7 @@ SVG
 .portOut[type="int"]:after,
 .portIn[type="int"]:before
 {
-	background: MidnightBlue;
+	background: DodgerBlue;
 }
 .portOut[type="string"]:after,
 .portIn[type="string"]:before
@@ -244,7 +250,7 @@ SVG
 .portOut[type="bool"]:after,
 .portIn[type="bool"]:before
 {
-	background: NavajoWhite;
+	background: #FFFFFA;
 }
 .portOut[type="float"]:after,
 .portIn[type="float"]:before
@@ -259,7 +265,7 @@ SVG
 .portOut[type="CollisionComponent"]:after,
 .portIn[type="CollisionComponent"]:before
 {
-	background: Lime;
+	background: Orange;
 }
 .portOut[type="PhysicsComponent"]:after,
 .portIn[type="PhysicsComponent"]:before
@@ -269,7 +275,7 @@ SVG
 .portOut[type="ScriptComponent"]:after,
 .portIn[type="ScriptComponent"]:before
 {
-	background: Tomato;
+	background: DarkRed;
 }
 .portOut[type="int-pointer"]:after,
 .portIn[type="int-pointer"]:before

@@ -4,51 +4,51 @@ var FunctionsInit = function() {
 		tip: "This will create a new entity",
 		id : "NewEntity",
 		returnvalue : "Entity",
-		inVar : [],
-		outVar : [ "Entity" ]
+		inVar : [["","Flow","Flow"]],
+		outVar : [ "Flow", "Entity" ]
 	};
 
 	functions.NewTransformComponent = {
 	tip: "defines position and rotation of an entity",
 	id : "NewTransformComponent",
-	inVar : [ ["New","Entity","Entity"] ],
-	OutVar : [ "TransformComponent" ]
+	inVar : [ ["","Flow","Flow"],["New","Entity","Entity"] ],
+	outVar : [ "Flow", "TransformComponent" ]
 	};
 	
 	functions.NewCollisionComponent = {
 	tip: "Enables a entity to collide",
 	id: "NewCollisionComponent",
-	inVar : [ ["New","Entity","Entity"] ],
-	outVar : [ "CollisionComponent" ]
+	inVar : [ ["","Flow","Flow"],["New","Entity","Entity"] ],
+	outVar : [ "Flow", "CollisionComponent" ]
 	};
 	
 	functions.NewPhysicsComponent = {
 	tip: "",
 	id : "NewPhysicsComponent",
-	inVar : [ ["New","Entity","Entity"] ],
-	outVar : ["PhysicsComponent" ]
+	inVar : [ ["","Flow","Flow"],["New","Entity","Entity"] ],
+	outVar : [ "Flow", "PhysicsComponent" ]
 	};
 	
 	functions.NewScriptComponent = {
 	tip: "This will create a new entity",
 	id : "NewScriptComponent",
-	inVar : [ ["New","Entity","Entity"], ["Empty","ScriptName","String"] ],
-	outVar : ["ScriptComponent" ]
+	inVar : [ ["","Flow","Flow"],["New","Entity","Entity"], ["Empty","ScriptName","String"] ],
+	outVar : [ "Flow", "ScriptComponent" ]
 	};
 	
 	functions.CreatePhysicsHandle = {
 	tip: "This will create a new entity",
 	id: "CreatePhysicsHandle",
-	inVar : [ ["New","Entity","Entity"], ["0","Type","int"], ["false","ExternallyControlled","bool"] ],
-	outVar : [ "int-pointer" ]
+	inVar : [ ["","Flow","Flow"],["New","Entity","Entity"], ["0","Type","int"], ["false","ExternallyControlled","bool"] ],
+	outVar : [ "Flow", "int-pointer" ]
 	};
 	
 	functions.BindSphereShape = {
 	tip: "This will create a new entity",
 	id: "BindSphereShape",
-	inVar : [ ["New","Entity","Entity"], ["(1,1,1)","Position","vector3"],  ["(1,1,1,1)","Rotation","quaternion"],
+	inVar : [ ["","Flow","Flow"],["New","Entity","Entity"], ["(1,1,1)","Position","vector3"],  ["(1,1,1,1)","Rotation","quaternion"],
 				["1","Radius","float"], ["1","Mass","float"], ["true","CollideWStatic","bool"], ["true","CollideWExternal","bool"] ],
-	outVar : []
+	outVar : [ "Flow" ]
 	};
 	
 
@@ -71,13 +71,26 @@ var FunctionsInit = function() {
 				$(this).get(0).originalParent = $(this).parent();
 				$(this).parent().children().appendTo("#TempArea");
 				ui.helper.append("<br class=\"clear\">");
+				var inDiv = $("<div style='float: left; width: 50%;'></div>").appendTo(ui.helper);
 				for (var index in $(this)[0].func.inVar)
 				{
-					ui.helper.append("<div class=\"portIn\" type=\""+$(this)[0].func.inVar[index][2]+"\">" + $(this)[0].func.inVar[index][1] + "<br/><a>" + $(this)[0].func.inVar[index][0] + "</a></div>");
+					var port = $("<div class=\"portIn\" type=\""+$(this)[0].func.inVar[index][2]+"\"><div>" + $(this)[0].func.inVar[index][1] + "<br/><a>" + $(this)[0].func.inVar[index][0] + "</a></div></div>")
+					.appendTo(inDiv);
+					if($(this)[0].func.inVar[index][2] != "Flow")
+						port.children().children().filter("a")
+						.editable(function(value, settings){
+							return (value);
+						},
+						{
+							event: "dblclick",
+							style: "display: inline-block"
+						});
 				}
+				var outDiv = $("<div style='float: right; width: 50%;'></div>").appendTo(ui.helper);
 				for (var index in $(this)[0].func.outVar)
 				{
-					ui.helper.append("<div class=\"portOut\" type=\""+$(this)[0].func.outVar[index]+"\">" + $(this)[0].func.outVar[index] + "</div>");
+					var port = $("<div class=\"portOut\" type=\""+$(this)[0].func.outVar[index]+"\">" + $(this)[0].func.outVar[index] + "</div>")
+					.appendTo(outDiv);
 				}
 			},
 			revert: function(){
@@ -116,14 +129,15 @@ var FunctionsInit = function() {
 					{
 						var port = $("<div class=\"portIn\" type=\""+$(this)[0].func.inVar[index][2]+"\"><div>" + $(this)[0].func.inVar[index][1] + "<br/><a>" + $(this)[0].func.inVar[index][0] + "</a></div></div>")
 						.appendTo(inDiv);
-						port.children().children().filter("a")
-						.editable(function(value, settings){
-							return (value);
-						},
-						{
-							event: "dblclick",
-							style: "display: inline-block"
-						});
+						if($(this)[0].func.inVar[index][2] != "Flow")
+							port.children().children().filter("a")
+							.editable(function(value, settings){
+								return (value);
+							},
+							{
+								event: "dblclick",
+								style: "display: inline-block"
+							});
 					}
 					var outDiv = $("<div style='float: right;'></div>").appendTo(newblock);
 					for (var index in $(this)[0].func.outVar)
@@ -138,6 +152,7 @@ var FunctionsInit = function() {
 
 				return true; // revert
 			},
+			stack: "div",
 			helper: "clone",
 			revertDuration: 0,
 			cursorAt: {left: 0, top: 60}
@@ -145,31 +160,3 @@ var FunctionsInit = function() {
 		.get(0).func = functions[prop];
 	}
 };
-
-function checkColor(varType)
-{
-	if(varType == "Entity")
-		return "OrangeRed";
-	else if(varType == "vector3")
-		return "OliveDrab";
-	else if(varType == "int")
-		return "MidnightBlue";
-	else if(varType == "string")
-		return "Khaki";
-	else if(varType == "quaternion")
-		return "MediumSpringGreen";
-	else if(varType == "bool")
-		return "NavajoWhite";
-	else if(varType == "float")
-		return "DarkSalmon";
-	else if(varType == "TransformComponent")
-		return "LightSteelBlue";
-	else if(varType == "CollisionComponent")
-		return "Lime";
-	else if(varType == "PhysicsComponent")
-		return "Sienna";
-	else if(varType == "ScriptComponent")
-		return "Tomato";
-	else if(varType == "int-pointer")
-		return "Fuchsia";
-}
