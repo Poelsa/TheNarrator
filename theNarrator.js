@@ -45,6 +45,10 @@ $(function() {
 		//}
 	});
 	
+	$("#Help").click(function(event){
+		window.open("http://www.youtube.com/watch?v=oGKEvcwmD4A");
+	});
+	
 	$("#Workspace").mouseup(function(event){
 		$("#Workspace").get(0).drag = false;
 		$("#Workspace").css("cursor","default")
@@ -84,16 +88,16 @@ $(function() {
 	
 	
 	//Static input values predefined from the engine
-	TabInput["Input-OnCreate"] [0] = "Self";
-	TabInput["Input-OnCollide"][0] = "Self";
-	TabInput["Input-OnDestroy"][0] = "Self";
-	TabInput["Input-OnUpdate"] [0] = "Self";
-	TabInput["Input-OnCollide"][1] = "Entity";
+	TabInput["Input-OnCreate"] [0] = ["Self", "Entity"];
+	TabInput["Input-OnCollide"][0] = ["Self", "Entity"];
+	TabInput["Input-OnDestroy"][0] = ["Self", "Entity"];
+	TabInput["Input-OnUpdate"] [0] = ["Self", "Entity"];
+	TabInput["Input-OnCollide"][1] = ["Collider", "Entity"];
 
-	$.each(TabInput["Input-OnCreate"], function(){$("<div class=\"portOut\">").html(this).appendTo("#Input-OnCreate")});
-	$.each(TabInput["Input-OnCollide"], function(){$("<div class=\"portOut\">").html(this).appendTo("#Input-OnCollide")});
-	$.each(TabInput["Input-OnDestroy"], function(){$("<div class=\"portOut\">").html(this).appendTo("#Input-OnDestroy")});
-	$.each(TabInput["Input-OnUpdate"], function(){$("<div class=\"portOut\">").html(this).appendTo("#Input-OnUpdate")});
+	$.each(TabInput["Input-OnCreate"], function(){$("<div class=\"portOut\" type=\""+this[1]+"\">").html(this[0]).appendTo("#Input-OnCreate")});
+	$.each(TabInput["Input-OnCollide"], function(){$("<div class=\"portOut\" type=\""+this[1]+"\">").html(this[0]).appendTo("#Input-OnCollide")});
+	$.each(TabInput["Input-OnDestroy"], function(){$("<div class=\"portOut\" type=\""+this[1]+"\">").html(this[0]).appendTo("#Input-OnDestroy")});
+	$.each(TabInput["Input-OnUpdate"], function(){$("<div class=\"portOut\" type=\""+this[1]+"\">").html(this[0]).appendTo("#Input-OnUpdate")});
 	PortProcessing();
 	
 	// Zoom functionality

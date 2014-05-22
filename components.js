@@ -5,13 +5,13 @@ var ComponentsInit = function() {
 	tip : "This is not the entity you are looking for",
 	id : "Entity",
 	inVar : [],
-	ourVar : ["","Entity"]
+	outVar : [["Entity","Entity"]]
 	};
 
 	components.Transform = {
 		id 		: "Tranform",
 		inVar : [["(1,1,1)","Position", "vector3"], ["(1,1,1)","Scale", "vector3"]],
-		ourVar : [["Position", "vector3"],["Scale", "vector3"]]
+		outVar : [["Position", "vector3"],["Scale", "vector3"]]
 	};
 
 	components.Renderable = {
@@ -26,13 +26,13 @@ var ComponentsInit = function() {
 
 	components.Particle = {
 		id 		: "Particle",
-		inVar 	: [["New","Entity",""],["cube_emitter","Particle Emitter", "String"]],
+		inVar 	: [["New","Entity","Entity"],["cube_emitter","Particle Emitter", "String"]],
 		outVar	: [["Particle Emitter", "String"]]
 	};
 
 	components.Collision = {
 		id 		: "Collision",
-		inVar	: [["New","Entity",""],["0","Type", "int"],["false","ExternallyControlled", "bool"]],
+		inVar	: [["New","Entity","Entity"],["0","Type", "int"],["false","ExternallyControlled", "bool"]],
 		outVar	: [["Type", "int"],["ExternallyControlled", "bool"]]
 	};
 
@@ -85,7 +85,7 @@ var ComponentsInit = function() {
 					var inDiv = $("<div style='float: left;'></div>").appendTo(newblock);
 					for (var index in $(this)[0].component.inVar)
 					{
-						var port = $("<div class=\"portIn\"><div>" + $(this)[0].component.inVar[index][1] + "<br/><a>" + $(this)[0].component.inVar[index][0] + "</a></div></div>")
+						var port = $("<div class=\"portIn\" type=\""+$(this)[0].component.inVar[index][2]+"\"><div>" + $(this)[0].component.inVar[index][1] + "<br/><a>" + $(this)[0].component.inVar[index][0] + "</a></div></div>")
 						.appendTo(inDiv);
 						port.children().children().filter("a")
 						.editable(function(value, settings){
@@ -99,7 +99,7 @@ var ComponentsInit = function() {
 					var outDiv = $("<div style='float: right;'></div>").appendTo(newblock);
 					for (var index in $(this)[0].component.outVar)
 					{
-						var port = $("<div class=\"portOut\">" + $(this)[0].component.outVar[index][0] + "</div>")
+						var port = $("<div class=\"portOut\" type=\""+$(this)[0].component.outVar[index][1]+"\">" + $(this)[0].component.outVar[index][0] + "</div>")
 						.appendTo(outDiv);
 						PortFunctionality(port);
 					}
@@ -115,3 +115,31 @@ var ComponentsInit = function() {
 		.get(0).component = components[prop]
 	}
 };
+
+function checkColor(varType)
+{
+	if(varType == "Entity")
+		return "OrangeRed";
+	else if(varType == "vector3")
+		return "OliveDrab";
+	else if(varType == "int")
+		return "MidnightBlue";
+	else if(varType == "string")
+		return "Khaki";
+	else if(varType == "quaternion")
+		return "MediumSpringGreen";
+	else if(varType == "bool")
+		return "NavajoWhite";
+	else if(varType == "float")
+		return "DarkSalmon";
+	else if(varType == "TransformComponent")
+		return "LightSteelBlue";
+	else if(varType == "CollisionComponent")
+		return "Lime";
+	else if(varType == "PhysicsComponent")
+		return "Sienna";
+	else if(varType == "ScriptComponent")
+		return "Tomato";
+	else if(varType == "int-pointer")
+		return "Fuchsia";
+}

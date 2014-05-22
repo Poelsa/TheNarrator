@@ -184,7 +184,6 @@ SVG
 }
 .portIn:before
 {
-	background: blue;
 	left: -6px;
 	vertical-align: middle;
 }
@@ -212,8 +211,67 @@ SVG
 }
 .portOut:after
 {
-	background: red;
 	left: 6px;
+}
+.portOut[type="Entity"]:after,
+.portIn[type="Entity"]:before
+{
+	background: OrangeRed;
+}
+.portOut[type="vector3"]:after,
+.portIn[type="vector3"]:before
+{
+	background: OliveDrab;
+}
+.portOut[type="int"]:after,
+.portIn[type="int"]:before
+{
+	background: MidnightBlue;
+}
+.portOut[type="string"]:after,
+.portIn[type="string"]:before
+{
+	background: Khaki;
+}
+.portOut[type="quaternion"]:after,
+.portIn[type="quaternion"]:before
+{
+	background: MediumSpringGreen;
+}
+.portOut[type="bool"]:after,
+.portIn[type="bool"]:before
+{
+	background: NavajoWhite;
+}
+.portOut[type="float"]:after,
+.portIn[type="float"]:before
+{
+	background: DarkSalmon;
+}
+.portOut[type="TransformComponent"]:after,
+.portIn[type="TransformComponent"]:before
+{
+	background: LightSteelBlue;
+}
+.portOut[type="CollisionComponent"]:after,
+.portIn[type="CollisionComponent"]:before
+{
+	background: Lime;
+}
+.portOut[type="PhysicsComponent"]:after,
+.portIn[type="PhysicsComponent"]:before
+{
+	background: Sienna;
+}
+.portOut[type="ScriptComponent"]:after,
+.portIn[type="ScriptComponent"]:before
+{
+	background: Tomato;
+}
+.portOut[type="int-pointer"]:after,
+.portIn[type="int-pointer"]:before
+{
+	background: Fuchsia;
 }
 .TabInput
 {
