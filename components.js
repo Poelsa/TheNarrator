@@ -40,7 +40,7 @@ var ComponentsInit = function() {
 		$("<div class='components'>").html(components[prop].id).appendTo("#Elements-Variables").mousedown(function(){
 			$("#TempArea").css("left", $(this).parent().offset().left);
 			$("#TempArea").css("top", $(this).parent().offset().top);
-			$("#TempArea").css("width", $(this).parent().width());
+			$("#TempArea").css("width", "100%");
 			$("#TempArea").css("margin", "0");
 		})
 		.draggable({

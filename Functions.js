@@ -124,6 +124,8 @@ function CreateBlock(html, obj, block)
 	.mousedown(function(e){e.stopPropagation();});
 
 	CreatePorts(obj, newblock);
+	
+	return newblock;
 }
 
 function CreatePorts(obj, block)

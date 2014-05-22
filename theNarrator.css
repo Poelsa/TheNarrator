@@ -4,6 +4,14 @@ BODY
   color: white;
   margin: 0;
 }
+*
+{
+  -webkit-user-select: none;
+}
+input[type=text], input[type=password], input[type=number]
+{
+  -webkit-user-select: text;
+}
 .clear
 {
 	position: relative;
