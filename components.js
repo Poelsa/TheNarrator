@@ -2,10 +2,10 @@ var ComponentsInit = function() {
 	var components = {};
 
 	components.Entity = {
-	tip : "This is not the entity you are looking for",
-	id : "Entity",
-	inVar : [],
-	outVar : [["Entity","Entity"]]
+		tip : "This is not the entity you are looking for",
+		id : "Entity",
+		inVar : [],
+		outVar : [["Entity","Entity"]]
 	};
 
 	components.Transform = {
@@ -47,69 +47,19 @@ var ComponentsInit = function() {
 			start: function(e, ui){
 				$(this)[0].ui = ui;
 				ui.helper.addClass("variable");
+				ui.helper.addClass("ui-widget-content");
+				ui.helper.removeClass("components");
+				ui.helper.removeClass("ui-draggable-dragging");
 				$(this).get(0).originalParent = $(this).parent();
-				$(this).parent().children().appendTo("#TempArea");
+				ui.helper.appendTo("#TempArea");
+				CreatePorts($(this)[0].component, ui.helper);
 			},
 			drag: function(e, ui){
 			},
 			revert: function(){
 				var currentTab = $("#Workspace>div")[$("#Workspace").tabs("option", "active")];
 				if($(this)[0].ui.helper.offset().left - $(currentTab).offset().left > -100)
-				{
-					var newblock = $("<div class='variable ui-widget-content ui-draggable'>").html($(this).html()).appendTo(currentTab).draggable({
-						stack: 'div',
-						start: function(e){
-							//$(".TabInput").css("top", $(this).parent().parent().offset().top);
-							//$(".TabInput").css("left", $(this).parent().parent().offset().left);
-							$(".TabInput").css("margin", "1px");
-							$("#TempArea").css("left", $(this).parent().offset().left);
-							$("#TempArea").css("top", $(this).parent().offset().top);
-							$("#TempArea").css("width", $(this).parent().width());
-							$("#TempArea").css("margin", "1px"); // compensate for #Workspace's border
-							$(this).get(0).originalParent = $(this).parent();
-							$(this).parent().children().appendTo("#TempArea");
-						},
-						drag: function(e, ui){
-							// Keep the line start and end updated while dragging
-							UpdatePortLines(this);
-						},
-						stop: function(e){
-							$(this).parent().children().appendTo(currentTab);
-							}
-					})
-					.attr("title","")
-					.tooltip({content: $(this)[0].component.tip})
-					.css("top", $(this)[0].ui.helper.offset().top - $(currentTab).offset().top)
-					.css("left", $(this)[0].ui.helper.offset().left - $(currentTab).offset().left)
-					.hover().css("cursor","pointer")
-					.click(selectFunc)
-					.mousedown(function(e){e.stopPropagation();});
-				
-					newblock.append("<br class=\"clear\">");
-					var inDiv = $("<div style='float: left;'></div>").appendTo(newblock);
-					for (var index in $(this)[0].component.inVar)
-					{
-						var port = $("<div class=\"portIn\" type=\""+$(this)[0].component.inVar[index][2]+"\"><div>" + $(this)[0].component.inVar[index][1] + "<br/><a>" + $(this)[0].component.inVar[index][0] + "</a></div></div>")
-						.appendTo(inDiv);
-						port.children().children().filter("a")
-						.editable(function(value, settings){
-							return (value);
-						},
-						{
-							event: "dblclick",
-							style: "display: inline-block"
-						});
-					}
-					var outDiv = $("<div style='float: right;'></div>").appendTo(newblock);
-					for (var index in $(this)[0].component.outVar)
-					{
-						var port = $("<div class=\"portOut\" type=\""+$(this)[0].component.outVar[index][1]+"\">" + $(this)[0].component.outVar[index][0] + "</div>")
-						.appendTo(outDiv);
-						PortFunctionality(port);
-					}
-					
-					$(this).parent().children().appendTo($(this).get(0).originalParent);
-				}
+					CreateBlock(this, $(this)[0].component, $("<div class='variable ui-widget-content ui-draggable'>"));
 					
 				return true; // revert
 			},

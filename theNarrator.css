@@ -139,13 +139,14 @@ SVG
 }
 .block
 {
-  border-radius: 0.5em;
+  border-radius: 0.7em;
   text-align: center;
   display: inline-block;
-  min-width: 200px;
+  text-align: center;
   position: absolute;
   z-index: 1;
   font-size: 14;
+  min-width: 200px;
   border-color: #40A040;
 }
 .variable
@@ -153,9 +154,10 @@ SVG
   border-radius: 0.7em;
   text-align: center;
   display: inline-block;
-	text-align: center;
-	position: absolute;
-	z-index: 1;
+  text-align: center;
+  position: absolute;
+  z-index: 1;
+  font-size: 14;
   min-width: 125px;
   border-color: #4040D0;
 }
@@ -164,6 +166,7 @@ SVG
 	position: relative;
 	font-size: 12px;
 	font-family: Courier;
+	display: block;
 }
 .portIn:hover, .portOut:hover
 {
@@ -175,7 +178,7 @@ SVG
 	height: 10px;
 	display: inline-block;
 	vertical-align: middle;
-	border-radius: 5px;
+	border-radius: 3px;
 	content: "";
 	position: relative;
 }
@@ -191,12 +194,12 @@ SVG
 	left: -6px;
 	vertical-align: middle;
 }
-.portIn>div
+.portIn>span
 {
 	display: inline-block;
 	vertical-align: middle;
 }
-.portIn>div>a
+.portIn>span>a
 {
 	border: 1px solid #404040;
 	background: #121212 url("css/vader/images/ui-bg_gloss-wave_16_121212_500x100.png") 50% top repeat-x;
