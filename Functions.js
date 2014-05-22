@@ -53,7 +53,11 @@ var FunctionsInit = function() {
 	
 
 	for(var prop in functions) {
-		$("<div class='functions'>").html("<span id = " + functions[prop].id + ">"+functions[prop].id+"</span>").appendTo("#Elements-Functions").mousedown(function(e){
+		//var tempAreaTest = $($("#Workspace>div")[$("#Workspace").tabs("option", "active")]).clone();
+		$("<div class='functions'>")
+		.html("<span id = " + functions[prop].id + ">"+functions[prop].id+"</span>")
+		.appendTo("#Elements-Functions")
+		.mousedown(function(e){
 			$("#TempArea").css("left", $(this).parent().offset().left);
 			$("#TempArea").css("top", $(this).parent().offset().top);
 			$("#TempArea").css("width", $(this).parent().width());
@@ -92,24 +96,7 @@ var FunctionsInit = function() {
 						},
 						drag: function(e, ui){
 							// Keep the line start and end updated while dragging
-							var workspace = $($("#Workspace>div")[$("#Workspace").tabs("option", "active")]);
-							$(this).children().filter(".portIn").each(function(){
-								if($(this)[0].line)
-									$(this)[0].line.Update($(this)[0].line.from,
-										{x: $(this).offset().left + 6 - workspace.offset().left,
-										y: $(this).offset().top + $(this).height()/2 - workspace.offset().top});
-							});
-							$(this).children().filter(".portOut").each(function(){
-								if($(this)[0].line)
-								{
-									var port = $(this);
-									$.each($(this)[0].line, function(){this.Update(
-										{x: port.offset().left + port.width() + 6 - workspace.offset().left,
-										y: port.offset().top + port.height()/2 - workspace.offset().top},
-										this.to);
-									});
-								}
-							});
+							UpdatePortLines(this);
 						},
 						stop: function(e){
 							$(this).parent().children().appendTo(currentTab);
@@ -117,8 +104,8 @@ var FunctionsInit = function() {
 					})
 					.attr("title","")
 					.tooltip({content: $(this)[0].func.tip})
-					.css("top", $(this)[0].ui.helper.offset().top - $(currentTab).offset().top)
-					.css("left", $(this)[0].ui.helper.offset().left - $(currentTab).offset().left)
+					.css("top", $(this)[0].ui.helper.offset().top - $(currentTab).children().offset().top)
+					.css("left", $(this)[0].ui.helper.offset().left - $(currentTab).children().offset().left)
 					.css("cursor","pointer")
 					.click(selectFunc)
 					.mousedown(function(e){e.stopPropagation();});
@@ -152,7 +139,8 @@ var FunctionsInit = function() {
 				return true; // revert
 			},
 			helper: "clone",
-			revertDuration: 0
+			revertDuration: 0,
+			cursorAt: {left: 0, top: 60}
 		}).hover().css("cursor", "pointer")
 		.get(0).func = functions[prop];
 	}
