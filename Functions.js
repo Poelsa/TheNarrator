@@ -100,7 +100,7 @@ function CreateBlock(html, obj, block)
 	var newblock = block.html($(html).html()).appendTo(currentTab).draggable({
 		stack: 'div',
 		start: function(e){
-			$("#TempArea").css("left", $(this).parent().offset().left); //Here be wrong stuff
+			$("#TempArea").css("left", $(this).parent().offset().left*currentTab.scale); //Here be wrong stuff
 			$("#TempArea").css("top", $(this).parent().offset().top);
 			$("#TempArea").css("width", $(this).parent().width());
 			//$("#TempArea").css("margin", "1px"); // compensate for #Workspace's border

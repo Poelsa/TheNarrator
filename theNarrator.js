@@ -117,7 +117,7 @@ $(function() {
 			currentTab.scale += 0.1;
 			$("#TempArea").get(0).scale += 0.1;
 		}
-		else if(delta < 0 && currentTab.scale > 0.1) {
+		else if(delta < 0 && currentTab.scale > 0.21) {
 			currentTab.scale -= 0.1;
 			$("#TempArea").get(0).scale -= 0.1;
 			/*if($(currentTab).width() * currentTab.scale < $("#Workspace").width()) {
