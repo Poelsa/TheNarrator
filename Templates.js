@@ -50,7 +50,8 @@ function addDraggableElement(New, Name)
 								templates[this.id].id = $("#Workspace-Name").val();
 								tabName.children("a").html(templates[this.id].id);
 								$("#templates-"+this.id).html(templates[this.id].id);
-								for(var index in templates[this.id].children)
+								//for(var index in templates[this.id].children)
+								for(var index = 0; index < templates[this.id].children.length; index++)
 									templates[this.id].children[index].html(templates[this.id].id);
 								form.dialog("close");
 							});

@@ -23,7 +23,7 @@ function PortFunctionality(p_ports)
 				var workspace = $($("#Workspace>div")[$("#Workspace").tabs("option", "active")]);
 				this.line[this.line.length-1].Update(
 					{x: $(this).offset().left + $(this).width() + 6 - workspace.offset().left,
-					y: $(this).offset().top + $(this).height()/2 - workspace.offset().top},
+					y: $(this).offset().top + $(this).height()/2 - workspace.offset().top + 3},
 					{x: ui.helper.offset().left + 6 - workspace.offset().left,
 					y: ui.helper.offset().top + 6 - workspace.offset().top});
 				$(this)[0].helperoffset = ui.helper.offset();

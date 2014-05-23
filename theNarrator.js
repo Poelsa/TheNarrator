@@ -31,39 +31,38 @@ $(function() {
 		}
 	});
 
-	//$("#Workspace").selectable();
-	
-	// Move the whole workspace
-	$("#Workspace>div").mousedown(function(event){
-		var currentTab = $("#Workspace>div")[$("#Workspace").tabs("option", "active")];
-		//if(event.target == currentTab) {
-			currentTab.drag = true;
-			$("#Workspace>div").css("cursor","move")
-			currentTab.positionX = event.pageX;
-			currentTab.positionY = event.pageY;
-			event.preventDefault();
-		//}
-	});
-	
 	$("#Help").click(function(event){
 		window.open("http://www.youtube.com/watch?v=oGKEvcwmD4A");
 	});
+
+	//$("#Workspace").selectable();
+	
+	// Move the whole workspace
+	$("#Workspace").mousedown(function(event){
+		var currentTab = $("#Workspace>div")[$("#Workspace").tabs("option", "active")];
+		currentTab.drag = true;
+		$("#Workspace").css("cursor","move")
+		currentTab.positionX = event.pageX;
+		currentTab.positionY = event.pageY;
+		event.preventDefault();
+	});
+	
 	
 	$("#Workspace").mouseup(function(event){
 		var currentTab = $("#Workspace>div")[$("#Workspace").tabs("option", "active")];
 		currentTab.drag = false;
-		$("#Workspace>div").css("cursor","default")
+		$("#Workspace").css("cursor","default")
 		event.preventDefault();
 	});
 	
-	$("#Workspace>div").mousemove(function(event){
+	$("#Workspace").mousemove(function(event){
 		var currentTab = $("#Workspace>div")[$("#Workspace").tabs("option", "active")];
 		if(currentTab.drag == true)
-		{			
+		{
 			$(currentTab).children().filter(":not(svg)").each(function(index,element){
 				if($(this).attr("role") != "tab") {
 					$(this).css('top', parseInt($(this).css('top'))+(event.pageY-currentTab.positionY)/currentTab.scale);
-					$(this).css('left', parseInt($(this).css('left'))+(event.pageX-currentTab.positionX)/currentTab.scale);
+					$(this).css('left', parseInt($(this).css('left'))+(event.pageX-currentTab.positionX)/currentTab.scale+1);
 				}
 			});
 			currentTab.positionX = event.pageX;
@@ -150,6 +149,13 @@ $(function() {
 	.tooltip({
 		content: "Incoming parameters"
 	});
+
+	function closeIt()
+	{
+	  return "This will delete all your data.";
+	}
+	window.onbeforeunload = closeIt;
+
 });
 
 //Selection
@@ -163,7 +169,7 @@ var selectFunc = function(event) {
 	$currentSelected = $(event.target);
 };
 
-// Add a warning on f5 refresh
+/*// Add a warning on f5 refresh
 $(document).on("keydown", keyDownEvent); // Disable popup by commenting out this row
 function keyDownEvent(e)
 {
@@ -172,10 +178,12 @@ function keyDownEvent(e)
 	}
 }
 
-function disableF5(e) { 		
+function disableF5(e) {
 	var confirmDelete = confirm("This will delete all your data. \nPress ok to delete");
 	if (confirmDelete == false) 
 	{
 		e.preventDefault(); 
 	}		
-};
+};*/
+
+
