@@ -83,6 +83,13 @@ BODY
   background-size: 100% 100%;
   color: #eeeeee;
 }
+.Logics
+{
+  border: 1px solid #404040;
+  background: #121212 url(css/vader/images/ui-bg_gloss-wave_16_121212_500x100.png) 50% top repeat-x;
+  background-size: 100% 100%;
+  color: #eeeeee;
+}
 .templates
 {
   border: 1px solid #404040;
@@ -149,6 +156,17 @@ SVG
   border-color: #40A040;
 }
 .variable
+{
+  border-radius: 0.7em;
+  text-align: center;
+  display: inline-block;
+	text-align: center;
+	position: absolute;
+	z-index: 1;
+  min-width: 125px;
+  border-color: #4040D0;
+}
+.logic
 {
   border-radius: 0.7em;
   text-align: center;
