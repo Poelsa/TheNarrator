@@ -139,15 +139,17 @@ function CreatePorts(obj, block)
 		.appendTo(inDiv);
 		if(obj.inVar[index][2] != "Flow")
 			port.children().children().filter("a")
+		if(typeof(obj.inVar[index][0]) == "string")
+			$(obj.inVar[index][0]!=""?"<br/><a>" + obj.inVar[index][0] + "</a>":"")
+			.appendTo(port.children())
 			.editable(function(value, settings){
 				return (value);
 			},
 			{
+				cssclass: "editable",
 				event: "dblclick",
-				style: "display: inline-block"
+				style: "display: inline-block; margin: 0;"
 			});
-		if(typeof(obj.inVar[index][0]) == "string")
-			port.children().append((obj.inVar[index][0]!=""?"<br/><a>" + obj.inVar[index][0] + "</a>":""));
 		else
 		{
 			port.children().append("<br/>");

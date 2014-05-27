@@ -344,3 +344,13 @@ SVG
 {
   border-color: DarkGoldenRod;
 }
+.editable form,
+.editable input {
+    margin: inherit;
+    padding: inherit;
+    font: inherit;
+    color: inherit;
+    background: inherit;
+    border: inherit;
+	text-align: inherit;
+}
