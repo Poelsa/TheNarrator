@@ -62,7 +62,7 @@ $(function() {
 			$(currentTab).children().filter(":not(svg)").each(function(index,element){
 				if($(this).attr("role") != "tab") {
 					$(this).css('top', parseInt($(this).css('top'))+(event.pageY-currentTab.positionY)/currentTab.scale);
-					$(this).css('left', parseInt($(this).css('left'))+(event.pageX-currentTab.positionX)/currentTab.scale+1);
+					$(this).css('left', parseInt($(this).css('left'))+(event.pageX-currentTab.positionX)/currentTab.scale);
 				}
 			});
 			currentTab.positionX = event.pageX;
