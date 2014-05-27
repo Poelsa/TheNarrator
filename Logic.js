@@ -3,19 +3,19 @@ var LogicInit = function() {
 	Logics.IfStatement = {
 		tip : "This is an if-statement",
 		id : "IfStatement",
-		inVar : [["","Flow", "Flow"], ["","ComparisionValue1", ""],["","ComparisionValue2", ""],["","ComparisionType", ""]],
+		inVar : [["","Flow", "Flow"], ["value","ComparisonValue1", ""],["value","ComparisonValue2", ""],["type","ComparisonType", ""]],
 		outVar : [[ "true", "Flow" ],["false", "Flow"]]
 	};
 	Logics.WhileStatement = {
 		tip : "This is a while-looping loop",
 		id : "WhileStatement",
-		inVar : [["","Flow", "Flow"], ["","ComparisionValue1", ""],["","ComparisionValue2", ""],["","ComparisionType", ""]],
-		outVar : [["loop", "Flow"]]
+		inVar : [["","Flow", "Flow"], ["value","ComparisonValue1", ""],["value","ComparisonValue2", ""],["type","ComparisonType", ""]],
+		outVar : [[ "End", "Flow" ], ["loop", "Flow"]]
 	};
 	Logics.Operator = {
 		tip : "This is an operator for operating sick peaple",
-		id : "operator",
-		inVar : [["","Flow", "Flow"], ["","ComparisionValue1", ""],["","ComparisionValue2", ""],["","ComparisionType", ""]],
+		id : "Operator",
+		inVar : [["","Flow", "Flow"], ["value","ComparisonValue1", ""],["value","ComparisonValue2", ""],["type","ComparisonType", ""]],
 		outVar : [[ "Flow", "Flow" ],["result", "Flow"]]
 	};
 	for(var prop in Logics) {		
@@ -71,21 +71,23 @@ var LogicInit = function() {
 					var inDiv = $("<div style='float: left;'></div>").appendTo(newblock);
 					for (var index in $(this)[0].logic.inVar)
 					{
-						var port = $("<div class=\"portIn\" type=\""+$(this)[0].logic.inVar[index][2]+"\"><div>" + $(this)[0].logic.inVar[index][1] + "<br/><a>" + $(this)[0].logic.inVar[index][0] + "</a></div></div>")
+						//var port = $("<div class=\"portIn\" type=\""+$(this)[0].logic.inVar[index][2]+"\"><div>" + $(this)[0].logic.inVar[index][1] + "<br/><a>" + $(this)[0].logic.inVar[index][0] + "</a></div></div>")
+						var port = $("<nobr class=\"portIn\" type=\""+$(this)[0].logic.inVar[index][2]+"\"><span>" + $(this)[0].logic.inVar[index][1] + "<br/>" + ($(this)[0].logic.inVar[index][0]!=""?"<a>" + $(this)[0].logic.inVar[index][0] + "</a>":"") + "</span></nobr>")
 						.appendTo(inDiv);
-						port.children().children().filter("a")
-						.editable(function(value, settings){
-							return (value);
-						},
-						{
-							event: "dblclick",
-							style: "display: inline-block"
-						});
+						if($(this)[0].logic.inVar[index][2] != "Flow")
+							port.children().children().filter("a")
+							.editable(function(value, settings){
+								return (value);
+							},
+							{
+								event: "dblclick",
+								style: "display: inline-block"
+							});
 					}
 					var outDiv = $("<div style='float: right;'></div>").appendTo(newblock);
 					for (var index in $(this)[0].logic.outVar)
 					{
-						var port = $("<div class=\"portOut\" type=\""+$(this)[0].logic.outVar[index][1]+"\">" + $(this)[0].logic.outVar[index][0] + "</div>")
+						var port = $("<nobr class=\"portOut\" type=\""+$(this)[0].logic.outVar[index][1]+"\">" + $(this)[0].logic.outVar[index][0] + "</nobr>")
 						.appendTo(outDiv);
 						PortFunctionality(port);
 					}

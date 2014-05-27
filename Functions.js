@@ -9,7 +9,7 @@ var FunctionsInit = function() {
 	};
 
 	functions.NewTransformComponent = {
-	tip: "defines position and rotation of an entity",
+	tip: "Defines position and rotation of an entity",
 	id : "NewTransformComponent",
 	inVar : [ ["","Flow","Flow"],["New","Entity","Entity"] ],
 	outVar : [ ["Flow","Flow"], ["TransformComponent","TransformComponent"] ]
