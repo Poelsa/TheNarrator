@@ -79,6 +79,7 @@ $(function() {
 	FunctionsInit();
 	ComponentsInit();
 	TemplatesInit();
+	LogicInit();
 	
 	TabInput["Input-OnCreate"] 	= new Array();
 	TabInput["Input-OnCollide"] = new Array();
