@@ -23,7 +23,7 @@ function PortFunctionality(p_ports)
 				var workspace = $($("#Workspace>div")[$("#Workspace").tabs("option", "active")]);
 				this.line[this.line.length-1].Update(
 					{x: $(this).offset().left + $(this).width() + 6 - workspace.offset().left,
-					y: $(this).offset().top + $(this).height()/2 - workspace.offset().top},
+					y: $(this).offset().top + $(this).height()/2 - workspace.offset().top + 3},
 					{x: ui.helper.offset().left + 6 - workspace.offset().left,
 					y: ui.helper.offset().top + 6 - workspace.offset().top});
 				$(this)[0].helperoffset = ui.helper.offset();
@@ -67,30 +67,33 @@ function PortFunctionality(p_ports)
 
 function checkColor(varType)
 {
-	if(varType == "Flow")
-		return "Gray";
-	else if(varType == "Entity")
+	switch(varType.toUpperCase())
+	{
+	case "FLOW":
+			return "Gray";
+	case "ENTITY":
 		return "OrangeRed";
-	else if(varType == "vector3")
+	case "VECTOR3":
 		return "OliveDrab";
-	else if(varType == "int")
+	case "INT":
 		return "DodgerBlue";
-	else if(varType == "string")
+	case "STRING":
 		return "Khaki";
-	else if(varType == "quaternion")
+	case "QUATERNION":
 		return "MediumSpringGreen";
-	else if(varType == "bool")
+	case "BOOL":
 		return "#FFFFFA";
-	else if(varType == "float")
+	case "FLOAT":
 		return "DarkSalmon";
-	else if(varType == "TransformComponent")
+	case "TRANSFORMCOMPONENT":
 		return "LightSteelBlue";
-	else if(varType == "CollisionComponent")
+	case "COLLISIONCOMPONENT":
 		return "Orange";
-	else if(varType == "PhysicsComponent")
+	case "PHYSICSCOMPONENT":
 		return "Sienna";
-	else if(varType == "ScriptComponent")
+	case "SCRIPTCOMPONENT":
 		return "DarkRed";
-	else if(varType == "int-pointer")
+	case "INT-POINTER":
 		return "Fuchsia";
+	}
 }
