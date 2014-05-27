@@ -97,12 +97,13 @@ function CreateBlock(html, obj, block)
 {
 	var currentTab = $("#Workspace>div")[$("#Workspace").tabs("option", "active")];
 	
-	var newblock = block.html($(html).html()).appendTo(currentTab).draggable({
+	var newblock = block.html("<span class=\"title\">"+obj.id+"</div>").appendTo(currentTab).draggable({
 		stack: 'div',
 		start: function(e){
-			$("#TempArea").css("left", $(this).parent().offset().left*currentTab.scale); //Here be wrong stuff
+			$("#TempArea").css("left", $(this).parent().offset().left/**currentTab.scale*/); //Here be wrong stuff
 			$("#TempArea").css("top", $(this).parent().offset().top);
 			$("#TempArea").css("width", $(this).parent().width());
+			$("#TempArea").css("z-index", "9999");
 			//$("#TempArea").css("margin", "1px"); // compensate for #Workspace's border
 			$(this).get(0).originalParent = $(this).parent();
 			$(this).parent().children().appendTo("#TempArea");
