@@ -96,6 +96,7 @@ function addDraggableElement(New, Name)
 				$(this).parent().children().appendTo($(this).get(0).originalParent);
 				return true; // revert
 			},
+			stack: "div",
 			helper: "clone",
 			revertDuration: 0
 		}).hover().css("cursor", "pointer")

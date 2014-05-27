@@ -247,6 +247,11 @@ SVG
 {
 	left: 6px;
 }
+.portOut[type="any"]:after,
+.portIn[type="any"]:before
+{
+	background: #444444;
+}
 .portOut[type="Flow"]:after,
 .portIn[type="Flow"]:before
 {

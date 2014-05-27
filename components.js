@@ -63,6 +63,7 @@ var ComponentsInit = function() {
 					
 				return true; // revert
 			},
+			stack: "div",
 			helper: "clone",
 			revertDuration: 0
 		}).hover().css("cursor", "pointer")
