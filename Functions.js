@@ -100,7 +100,7 @@ function CreateBlock(html, obj, block)
 	var newblock = block.html("<span class=\"title\">"+obj.id+"</div>").appendTo(currentTab).draggable({
 		stack: 'div',
 		start: function(e){
-			$("#TempArea").css("left", $(this).parent().offset().left/**currentTab.scale*/); //Here be wrong stuff
+			$("#TempArea").css("left", $(this).parent().offset().left); //Here be wrong stuff
 			$("#TempArea").css("top", $(this).parent().offset().top);
 			$("#TempArea").css("width", $(this).parent().width());
 			$("#TempArea").css("z-index", "9999");
