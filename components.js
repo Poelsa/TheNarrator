@@ -4,19 +4,19 @@ var ComponentsInit = function() {
 	components.Entity = {
 		tip : "This is not the entity you are looking for",
 		id : "Entity",
-		inVar : [],
+		inVar : [["New","Entity","Entity"]],
 		outVar : [["Entity","Entity"]]
 	};
 
 	components.Transform = {
 		id 		: "Tranform",
-		inVar : [["(1,1,1)","Position", "vector3"], ["(1,1,1)","Scale", "vector3"]],
+		inVar : [["New","Entity","Entity"],["(1,1,1)","Position", "vector3"], ["(1,1,1)","Scale", "vector3"]],
 		outVar : [["Position", "vector3"],["Scale", "vector3"]]
 	};
 
 	components.Renderable = {
 		id 				: "Renderable",
-		inVar			: [["cube","Model", "String"],["cube_material","Material", "String"],["0","Shadow Technique", "int"],
+		inVar			: [["New","Entity","Entity"],["cube","Model", "String"],["cube_material","Material", "String"],["0","Shadow Technique", "int"],
 							["cube_diffuse","Material Diffuse", "String"],["cube_specular","Material Specular", "String"],["cube_normal","Material Normal", "String"],
 							["cube_glow","Material Glow", "String"],["cube_effect","Material Effect", "String"]],
 		outVar			: [["Model", "String"],["Material", "String"],["Shadow Technique", "int"],
