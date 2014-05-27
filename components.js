@@ -35,6 +35,12 @@ var ComponentsInit = function() {
 		inVar	: [["New","Entity","Entity"],["0","Type", "int"],["false","ExternallyControlled", "bool"]],
 		outVar	: [["Type", "int"],["ExternallyControlled", "bool"]]
 	};
+	
+	components.Vector3 = {
+		id		: "Vector3",
+		inVar	: [["(1,1,1)", "Position", "vector3"]],
+		outVar	: [["X","float"],["Y", "float"],["Z", "float"]]
+		};
 
 	for(var prop in components) {		
 		$("<div class='components'>").html(components[prop].id).appendTo("#Elements-Variables").mousedown(function(){
