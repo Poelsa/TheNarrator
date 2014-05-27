@@ -13,10 +13,11 @@ var LogicInit = function() {
 		outVar : [[ "End", "Flow" ], ["loop", "Flow"]]
 	};
 	Logics.Operator = {
-		tip : "This is an operator for operating sick peaple",
+		tip : "This is an operator for operating sick peeapple",
 		id : "Operator",
-		inVar : [["","Flow", "Flow"], ["value","ComparisonValue1", ""],["value","ComparisonValue2", ""],["type","ComparisonType", ""]],
-		outVar : [[ "Flow", "Flow" ],["result", "Flow"]]
+		inVar : [["","Flow", "Flow"], ["value","Value1", "int"],["value","Value2", "int"],["type","Operator", "Logic"]],
+		outVar : [[ "Flow", "Flow" ],["result", "int"]]
+
 	};
 	for(var prop in Logics) {		
 		$("<div class='Logics'>").html(Logics[prop].id).appendTo("#Elements-Logic").mousedown(function(){

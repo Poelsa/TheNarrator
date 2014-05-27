@@ -18,7 +18,7 @@ $(function() {
 	$("#SideBar").droppable({
 		drop: function(event, ui) {
 			ui.draggable.parent().children().appendTo(ui.draggable.get(0).originalParent);
-			if(ui.draggable.hasClass("block") || ui.draggable.hasClass("variable"))
+			if(ui.draggable.hasClass("block") || ui.draggable.hasClass("variable") || ui.draggable.hasClass("logic"))
 				ui.draggable.remove();
 		}
 	});
