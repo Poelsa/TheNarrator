@@ -15,13 +15,13 @@ var ComponentsInit = function() {
 	};
 
 	components.Renderable = {
-		id 				: "Renderable",
-		inVar			: [["New","Entity","Entity"],["cube","Model", "String"],["cube_material","Material", "String"],["0","Shadow Technique", "int"],
-							["cube_diffuse","Material Diffuse", "String"],["cube_specular","Material Specular", "String"],["cube_normal","Material Normal", "String"],
-							["cube_glow","Material Glow", "String"],["cube_effect","Material Effect", "String"]],
-		outVar			: [["Model", "String"],["Material", "String"],["Shadow Technique", "int"],
-							["Material Diffuse", "String"],["Material Specular", "String"],["Material Normal", "String"],
-							["Material Glow", "String"],["Material Effect", "String"]]
+		id 		: "Renderable",
+		inVar	: [["New","Entity","Entity"],["cube","Model", "String"],["cube_material","Material", "String"],["0","Shadow Technique", "int"],
+					["cube_diffuse","Material Diffuse", "String"],["cube_specular","Material Specular", "String"],["cube_normal","Material Normal", "String"],
+					["cube_glow","Material Glow", "String"],["cube_effect","Material Effect", "String"]],
+		outVar	: [["Model", "String"],["Material", "String"],["Shadow Technique", "int"],
+					["Material Diffuse", "String"],["Material Specular", "String"],["Material Normal", "String"],
+					["Material Glow", "String"],["Material Effect", "String"]]
 	};
 
 	components.Particle = {
@@ -69,6 +69,7 @@ var ComponentsInit = function() {
 					
 				return true; // revert
 			},
+			stack: "div",
 			helper: "clone",
 			revertDuration: 0
 		}).hover().css("cursor", "pointer")

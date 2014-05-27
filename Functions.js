@@ -97,12 +97,13 @@ function CreateBlock(html, obj, block)
 {
 	var currentTab = $("#Workspace>div")[$("#Workspace").tabs("option", "active")];
 	
-	var newblock = block.html($(html).html()).appendTo(currentTab).draggable({
+	var newblock = block.html("<span class=\"title\">"+obj.id+"</div>").appendTo(currentTab).draggable({
 		stack: 'div',
 		start: function(e){
-			$("#TempArea").css("left", $(this).parent().offset().left*currentTab.scale); //Here be wrong stuff
+			$("#TempArea").css("left", $(this).parent().offset().left); //Here be wrong stuff
 			$("#TempArea").css("top", $(this).parent().offset().top);
 			$("#TempArea").css("width", $(this).parent().width());
+			$("#TempArea").css("z-index", "9999");
 			//$("#TempArea").css("margin", "1px"); // compensate for #Workspace's border
 			$(this).get(0).originalParent = $(this).parent();
 			$(this).parent().children().appendTo("#TempArea");
@@ -134,7 +135,7 @@ function CreatePorts(obj, block)
 	var inDiv = $("<div style='float: left;'></div>").appendTo(block);
 	for (var index in obj.inVar)
 	{
-		var port = $("<nobr class=\"portIn\" type=\""+obj.inVar[index][2]+"\"><span>" + obj.inVar[index][1] + "<br/>" + (obj.inVar[index][0]!=""?"<a>" + obj.inVar[index][0] + "</a>":"") + "</span></nobr>")
+		var port = $("<nobr class=\"portIn\" type=\""+obj.inVar[index][2]+"\"><span>" + obj.inVar[index][1] + "</span></nobr>")
 		.appendTo(inDiv);
 		if(obj.inVar[index][2] != "Flow")
 			port.children().children().filter("a")
@@ -145,6 +146,15 @@ function CreatePorts(obj, block)
 				event: "dblclick",
 				style: "display: inline-block"
 			});
+		if(typeof(obj.inVar[index][0]) == "string")
+			port.children().append((obj.inVar[index][0]!=""?"<br/><a>" + obj.inVar[index][0] + "</a>":""));
+		else
+		{
+			port.children().append("<br/>");
+			var dropdown = $("<select style=\"width: 100%;\">").appendTo(port.children());
+			for(var i in obj.inVar[index][0])
+				dropdown.append("<option>"+obj.inVar[index][0][i]+"</option>");
+		}
 	}
 	var outDiv = $("<div style='float: right;'></div>").appendTo(block);
 	for (var index in obj.outVar)

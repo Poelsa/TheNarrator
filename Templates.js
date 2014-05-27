@@ -20,6 +20,7 @@ function addDraggableElement(New, Name)
 			$("#TempArea").css("top", $(this).parent().offset().top);
 			$("#TempArea").css("width", "100%");
 			$("#TempArea").css("margin", "0");
+			$("#TempArea").css("z-index", "9999");
 		})
 		.draggable({
 			start: function(e, ui){
@@ -36,6 +37,7 @@ function addDraggableElement(New, Name)
 			},
 			revert: function(){
 				var currentTab = $("#Workspace>div")[$("#Workspace").tabs("option", "active")];
+				var index = $(this)[0].idx;
 				if($(this)[0].ui.helper.offset().left - $(currentTab).offset().left > -100)
 				{
 					if(New)
@@ -52,36 +54,49 @@ function addDraggableElement(New, Name)
 								$("#templates-"+this.id).html(templates[this.id].id);
 								//for(var index in templates[this.id].children)
 								for(var index = 0; index < templates[this.id].children.length; index++)
-									templates[this.id].children[index].html(templates[this.id].id);
+								{
+									templates[this.id].children[index].children().filter("span.title").html(templates[this.id].id);
+								}
 								form.dialog("close");
+								form.remove();
 							});
 							form.dialog();
 						});
-						var inputDiv = $("<div class=\"TabInput ui-widget-content\" id=\"Input-"+numTemplates+"\" ><div>Inputs</div></div>").appendTo($("<div id=\"Workspace-"+numTemplates+"\"></div>").appendTo('#Workspace'));
-							
-						var portDiv = $("<div style=\"float: right; clear: both;\">").appendTo(inputDiv);
-						$("<div class=\"portOut\" type=\"Flow\">").html("Flow").appendTo(portDiv);
-							
+						var newWorkspace = $("<div id=\"Workspace-"+numTemplates+"\"></div>").appendTo('#Workspace');
+						newWorkspace[0].renderer = Raphael(newWorkspace[0],newWorkspace.width(),newWorkspace.height());
+						
 						TabInput['Input-'+numTemplates+''] = new Array();
 					
 						$("#Workspace").tabs("refresh");
-						templates["Function-" + numTemplates] =
+						index = "Function-" + numTemplates;
+						templates[index] =
 							{
-								id : "Function-" + numTemplates, children: [block],
+								id : index,
+								children: [],
 								inVar : [["","Flow","Flow"]],
 								outVar : [["Flow","Flow"]]
 							};
-						addDraggableElement(false, templates["Function-" + numTemplates].id);
+						addDraggableElement(false, templates[index].id);
+						
+						var inputDiv = $("<div class=\"TabInput ui-widget-content\" id=\"Input-"+numTemplates+"\" ><div>Inputs</div></div>").appendTo(newWorkspace);
+						var tempObject = {inVar: [], outVar:[["Flow","Flow"]]};
+						CreatePorts(tempObject, inputDiv);
+						
+						
+						var outputDiv = $("<div class=\"TabOutput ui-widget-content\" id=\"Output-"+numTemplates+"\" ><div>Outputs</div></div>").appendTo(newWorkspace);
+						tempObject = {inVar : [["","Flow","Flow"]], outVar: []};
+						CreatePorts(tempObject, outputDiv);
+						
 						numTemplates++;
 					}
+					var block = CreateBlock(this, templates[index], $("<div class='block ui-widget-content ui-draggable'>"));
 					
-					var block = CreateBlock(this, templates[$(this)[0].idx], $("<div class='block ui-widget-content ui-draggable'>"));
-					if(!New)
-						templates[$(this)[0].idx].children.push(block);
+					templates[index].children.push(block);
 				}
 				$(this).parent().children().appendTo($(this).get(0).originalParent);
 				return true; // revert
 			},
+			stack: "div",
 			helper: "clone",
 			revertDuration: 0
 		}).hover().css("cursor", "pointer")

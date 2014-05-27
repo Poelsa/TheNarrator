@@ -58,7 +58,7 @@ function PortFunctionality(p_ports)
 			revert: true,
 			revertDuration: 0,
 			cursorAt: {left: 6, top: 6},
-			snap: '.portIn[type="'+$(this).attr("type")+'"]',
+			snap: '.portIn[type="'+$(this).attr("type")+'"]' + ($(this).attr("type")=='Flow'?'':', .portIn[type=any]'),
 			snapMode: "inner",
 			snapTolerance: 8
 		});

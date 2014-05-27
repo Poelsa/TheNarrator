@@ -247,6 +247,11 @@ SVG
 {
 	left: 6px;
 }
+.portOut[type="any"]:after,
+.portIn[type="any"]:before
+{
+	background: #444444;
+}
 .portOut[type="Flow"]:after,
 .portIn[type="Flow"]:before
 {
@@ -322,6 +327,18 @@ SVG
   width: 100px;
   height: 75px;
   margin: 1px;
+}
+.TabOutput
+{
+  position: absolute;
+  top: 26px;
+  left: 100%;
+  display: inline-block;
+  z-index: 2;
+  width: 100px;
+  height: 75px;
+  margin: 1px;
+  margin-left: -100px;
 }
 .selected
 {
