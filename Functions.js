@@ -9,9 +9,7 @@ var FunctionsInit = function() {
 	functions.NewRenderableComponent = {
 	tip	: "Defines material and certain techniques for rendering an entity",
 	id	: "NewRenderableComponent",
-	inVar	:	[["","Flow","Flow"],["New","Entity","Entity"],["cube","Model", "String"],["cube_material","Material", "String"],["0","Shadow Technique", "int"],
-					["cube_diffuse","Material Diffuse", "String"],["cube_specular","Material Specular", "String"],["cube_normal","Material Normal", "String"],
-					["cube_glow","Material Glow", "String"],["cube_effect","Material Effect", "String"]],
+	inVar	:	[["","Flow","Flow"],["New","Entity","Entity"]],
 	outVar	:	[["Flow", "Flow"]]
 	};
 	functions.NewTransformComponent = {
@@ -29,28 +27,28 @@ var FunctionsInit = function() {
 	};
 	
 	functions.NewPhysicsComponent = {
-	tip: "",
+	tip: "Required for physical behavior",
 	id : "NewPhysicsComponent",
 	inVar : [ ["","Flow","Flow"],["New","Entity","Entity"] ],
 	outVar : [ ["Flow","Flow"]]
 	};
 	
 	functions.NewScriptComponent = {
-	tip: "This will create a new entity",
+	tip: "Attaches a seperate script-file to the entity",
 	id : "NewScriptComponent",
 	inVar : [ ["","Flow","Flow"],["New","Entity","Entity"], ["Empty","ScriptName","String"] ],
 	outVar : [ ["Flow","Flow"]]
 	};
 	
 	functions.CreatePhysicsHandle = {
-	tip: "This will create a new entity",
+	tip: "int-pointer that is used to access the physics of an entity",
 	id: "CreatePhysicsHandle",
 	inVar : [ ["","Flow","Flow"],["New","Entity","Entity"], ["0","Type","int"], ["false","ExternallyControlled","bool"] ],
 	outVar : [ ["Flow","Flow"] ]
 	};
 	
 	functions.BindSphereShape = {
-	tip: "This will create a new entity",
+	tip: "Physics shape for non-static objects",
 	id: "BindSphereShape",
 	inVar : [ ["","Flow","Flow"],["New","Entity","Entity"], ["(1,1,1)","Position","vector3"],  ["(1,1,1,1)","Rotation","quaternion"],
 				["1","Radius","float"], ["1","Mass","float"], ["true","CollideWStatic","bool"], ["true","CollideWExternal","bool"] ],
@@ -61,8 +59,10 @@ var FunctionsInit = function() {
 	for(var prop in functions) {
 		//var tempAreaTest = $($("#Workspace>div")[$("#Workspace").tabs("option", "active")]).clone();
 		$("<div class='functions'>")
-		.html("<span id = " + functions[prop].id + ">"+functions[prop].id+"</span>")
+		.html("<span class =\"title\" id = " + functions[prop].id + ">"+functions[prop].id+"</span>")
 		.appendTo("#Elements-Functions")
+		.attr("title","")
+		.tooltip({content: functions[prop].tip, show:{delay: 2000}})
 		.mousedown(function(e){
 			$("#TempArea").css("left", $(this).parent().offset().left);
 			$("#TempArea").css("top", $(this).parent().offset().top);
@@ -95,6 +95,7 @@ var FunctionsInit = function() {
 			revertDuration: 0,
 			cursorAt: {left: 0, top: 60}
 		}).hover().css("cursor", "pointer")
+		
 		.get(0).func = functions[prop];
 	}
 };
@@ -123,7 +124,7 @@ function CreateBlock(html, obj, block)
 		}
 	})
 	.attr("title","")
-	.tooltip({content: obj.tip})
+	.tooltip({content: obj.tip, show:{delay: 2000}})
 	.css("top", $(html)[0].ui.helper.offset().top - $(currentTab).children().offset().top)
 	.css("left", $(html)[0].ui.helper.offset().left - $(currentTab).children().offset().left)
 	.css("cursor","pointer")
