@@ -3,11 +3,17 @@ var FunctionsInit = function() {
 	functions.NewEntity = {
 		tip: "This will create a new entity",
 		id : "NewEntity",
-		returnvalue : "Entity",
 		inVar : [["","Flow","Flow"]],
 		outVar : [ ["Flow","Flow"], ["Entity","Entity"] ]
 	};
-
+	functions.NewRenderableComponent = {
+	tip	: "Defines material and certain techniques for rendering an entity",
+	id	: "NewRenderableComponent",
+	inVar	:	[["","Flow","Flow"],["New","Entity","Entity"],["cube","Model", "String"],["cube_material","Material", "String"],["0","Shadow Technique", "int"],
+					["cube_diffuse","Material Diffuse", "String"],["cube_specular","Material Specular", "String"],["cube_normal","Material Normal", "String"],
+					["cube_glow","Material Glow", "String"],["cube_effect","Material Effect", "String"]],
+	outVar	:	[["Flow", "Flow"]]
+	};
 	functions.NewTransformComponent = {
 	tip: "Defines position and rotation of an entity",
 	id : "NewTransformComponent",
