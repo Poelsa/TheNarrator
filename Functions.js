@@ -12,35 +12,35 @@ var FunctionsInit = function() {
 	tip: "Defines position and rotation of an entity",
 	id : "NewTransformComponent",
 	inVar : [ ["","Flow","Flow"],["New","Entity","Entity"] ],
-	outVar : [ ["Flow","Flow"], ["TransformComponent","TransformComponent"] ]
+	outVar : [ ["Flow","Flow"]]
 	};
 	
 	functions.NewCollisionComponent = {
 	tip: "Enables a entity to collide",
 	id: "NewCollisionComponent",
 	inVar : [ ["","Flow","Flow"],["New","Entity","Entity"] ],
-	outVar : [ ["Flow","Flow"], ["CollisionComponent","CollisionComponent"] ]
+	outVar : [ ["Flow","Flow"]]
 	};
 	
 	functions.NewPhysicsComponent = {
 	tip: "",
 	id : "NewPhysicsComponent",
 	inVar : [ ["","Flow","Flow"],["New","Entity","Entity"] ],
-	outVar : [ ["Flow","Flow"], ["PhysicsComponent","PhysicsComponent"] ]
+	outVar : [ ["Flow","Flow"]]
 	};
 	
 	functions.NewScriptComponent = {
 	tip: "This will create a new entity",
 	id : "NewScriptComponent",
 	inVar : [ ["","Flow","Flow"],["New","Entity","Entity"], ["Empty","ScriptName","String"] ],
-	outVar : [ ["Flow","Flow"], ["ScriptComponent","ScriptComponent"] ]
+	outVar : [ ["Flow","Flow"]]
 	};
 	
 	functions.CreatePhysicsHandle = {
 	tip: "This will create a new entity",
 	id: "CreatePhysicsHandle",
 	inVar : [ ["","Flow","Flow"],["New","Entity","Entity"], ["0","Type","int"], ["false","ExternallyControlled","bool"] ],
-	outVar : [ ["Flow","Flow"], ["PhysicsHandle","int-pointer"] ]
+	outVar : [ ["Flow","Flow"] ]
 	};
 	
 	functions.BindSphereShape = {

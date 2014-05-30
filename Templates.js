@@ -60,7 +60,9 @@ function addDraggableElement(New, Name)
 								form.dialog("close");
 								form.remove();
 							});
-							form.dialog();
+							form.dialog({
+								title: 'Rename'
+							});
 						});
 						var newWorkspace = $("<div id=\"Workspace-"+numTemplates+"\"></div>").appendTo('#Workspace');
 						newWorkspace[0].renderer = Raphael(newWorkspace[0],newWorkspace.width(),newWorkspace.height());

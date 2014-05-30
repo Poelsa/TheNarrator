@@ -15,10 +15,18 @@ var LogicInit = function() {
 	Logics.Operator = {
 		tip : "This is an operator for operating sick peeapple",
 		id : "Operator",
-		inVar : [["","Flow", "Flow"], ["value","Value1", "any"],["value","Value2", "any"],["type","Operator", "Logic"]],
-		outVar : [[ "Flow", "Flow" ],["result", "int"]]
+		inVar : [["","Flow", "Flow"], ["value","Value1", "any"],["value","Value2", "any"],[["+", "-", "*", "/", "%"],"ComparisonType", ""]],
+		outVar : [[ "Flow", "Flow" ],["success", "bool"]]
 
 	};
+	
+	Logics.FlowConnector = {
+		tip : "Ties together two seperate flows",
+		id	: "Flow-connector",
+		inVar	: [["","Flow", "Flow"], ["","Flow", "Flow"]],
+		outVar	: [["Flow", "Flow"]]
+	};
+	
 	for(var prop in Logics) {		
 		$("<div class='Logics'>").html(Logics[prop].id).appendTo("#Elements-Logic").mousedown(function(){
 			$("#TempArea").css("left", $(this).parent().offset().left);

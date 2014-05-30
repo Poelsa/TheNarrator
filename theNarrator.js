@@ -94,9 +94,9 @@ $(function() {
 	
 	//Static input values predefined from the engine
 	TabInput["Input-OnCreate"]  = [["Flow", "Flow"],["Self", "Entity"]];
-	TabInput["Input-OnCollide"] = [["Flow", "Flow"],["Self", "Entity"]];
+	TabInput["Input-OnCollide"] = [["Flow", "Flow"],["Self", "Entity"],["Collider", "Entity"]];
 	TabInput["Input-OnDestroy"] = [["Flow", "Flow"],["Self", "Entity"]];
-	TabInput["Input-OnUpdate"]  = [["Flow", "Flow"],["Self", "Entity"],["Collider", "Entity"]];
+	TabInput["Input-OnUpdate"]  = [["Flow", "Flow"],["Self", "Entity"]];
 
 	var portDiv = $("<div style=\"float: right;\">").appendTo("#Input-OnCreate");
 	$.each(TabInput["Input-OnCreate"], function(){$("<div class=\"portOut\" type=\""+this[1]+"\">").html(this[0]).appendTo(portDiv)});
