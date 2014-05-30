@@ -46,7 +46,7 @@ function addDraggableElement(New, Name)
 						tabName.children().filter("a").get(0).id = "Function-" + numTemplates;
 						tabName.children().filter("a")
 						.dblclick(function(e){
-							var form = $("<form action='#'><input id='Workspace-Name' value='"+$(this).html()+"'/><br/><input value='Save' type='Submit'/></form>");
+							var form = $("<form action='#' style=\"margin: auto; text-align: center;\"><input id='Workspace-Name' value='"+$(this).html()+"'/><br/><input value='Save' type='Submit'/></form>");
 							form.get(0).id = this.id;
 							form.submit(function(e){
 								templates[this.id].id = $("#Workspace-Name").val();
@@ -61,7 +61,9 @@ function addDraggableElement(New, Name)
 								form.remove();
 							});
 							form.dialog({
-								title: 'Rename'
+								title: 'Rename',
+								modal: true,
+								minHeight: 'auto'
 							});
 						});
 						var newWorkspace = $("<div id=\"Workspace-"+numTemplates+"\"></div>").appendTo('#Workspace');
