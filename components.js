@@ -4,8 +4,8 @@ var ComponentsInit = function() {
 	components.Entity = {
 		tip : "This is not the entity you are looking for",
 		id : "Entity",
-		inVar : [["New","Entity","Entity"]],
-		outVar : [["Entity","Entity"]]
+		inVar : [["New","Entity","Entity"],["Null","Tag","String"]],
+		outVar : [["Entity","Entity"],["Tag","String"]]
 	};
 
 	components.Transform = {
